@@ -1,0 +1,33 @@
+<div class="section">
+
+	<a name="hello-world"></a>
+
+	<h1>Hello World</h1>
+
+	<p>In your project's root directory, make file called <code>index.js</code>:</p>
+
+<code>var breadbox = require('breadbox');
+
+breadbox.init({
+	controllers: {
+		'/index': function(response) {
+		    response.resolve({ person: "World" });
+		}
+	}
+});
+</code>
+
+	<p>In your project's root directory, make a folder called <code>views</code>. Inside that, create <code>index.html</code>:</p>
+
+	<code>Hello, {{person|skip}}!</code>
+
+	<p>In your terminal, enter the root directory of your project and start the server:</p>
+
+<code>cd ~/my-project
+node index</code>
+
+	<p>In your browser, navigate to http://localhost:1337 and you should see the following:</p>
+
+	<p class="serif">Hello, World!</p>
+
+</div>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <title>Breadbox Documentation</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css'>
+    <link href='/styles/style.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+	<div class="sidebar">
+
+		<h3>Documentation</h3>
+
+		<ul>
+			<li><a href="#intro">Intro</a></li>
+			<li><a href="#getting-started">Getting Started</a></li>
+			<li><a href="#hello-world">Hello World</a></li>
+			<li><a href="#breadbox">The breadbox object</a></li>
+				<ul>
+					<li><a href="#init">breadbox.init</a></li>
+					<li><a href="#db">breadbox.db</a></li>
+						<ul>
+							<li><a href="#db-get">breadbox.db.get</a></li>
+							<li><a href="#db-put">breadbox.db.put</a></li>
+							<li><a href="#db-drop">breadbox.db.drop</a></li>
+						</ul>
+					<li><a href="#promise">breadbox.promise</a></li>
+					<li><a href="#error-handling">Error handling</a></li>
+					<ul>
+						<li><a href="#handle">breadbox.handle</a></li>
+						<li><a href="#attempt">breadbox.attempt</a></li>
+					</ul>
+				</ul>
+			<li><a href="#controllers">Controllers</a></li>
+				<ul>
+					<li><a href="#routes">Routes</a></li>
+					<li><a href="#response">The response object</a></li>
+					<li><a href="#request">The request object</a></li>
+						<ul>
+							<li><a href="#data">request.data</a></li>
+							<li><a href="#body">request.body</a></li>
+							<li><a href="#files">request.files</a></li>
+							<li><a href="#params">request.params</a></li>
+							<li><a href="#query">request.query</a></li>
+							<li><a href="#cookies">request.cookies</a></li>
+							<li><a href="#redirect">request.redirect</a></li>
+							<li><a href="#settings">request.settings</a></li>
+							<li><a href="#session">request.session</a></li>
+						</ul>
+					<li><a href="#post">POST requests</a></li>
+						<ul>
+							<li><a href="#csrf">CSRF protection</a></li>
+						</ul>
+					<li><a href="#authentication">Authentication</a></li>
+						<ul>
+							<li><a href="#session-save">request.session.save</a></li>
+							<li><a href="#session-get">request.session.get</a></li>
+							<li><a href="#session-set">request.session.set</a></li>
+							<li><a href="#session-end">request.session.end</a></li>
+						</ul>
+				</ul>
+			<li><a href="#views">Views</a></li>
+				<ul>
+					<li><a href="#includes">Includes</a></li>
+					<li><a href="#if-blocks">Conditional blocks</a></li>
+					<li><a href="#loops">Loops</a></li>
+					<li><a href="#variables">Variables</a></li>
+					<li><a href="#filters">Filters</a></li>
+					<li><a href="#safe">HTML escaping</a></li>
+				</ul>
+		</ul>
+	</div>
+
+	<div class="main">
+
+		{{include docs/intro}}
+
+		{{include docs/getting-started}}
+
+		{{include docs/hello-world}}
+
+		{{include docs/breadbox}}
+
+	</div>
+	
+</body>
+</html>

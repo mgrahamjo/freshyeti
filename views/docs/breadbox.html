@@ -1,0 +1,94 @@
+<div class="section">
+
+	<a name="breadbox"></a>
+
+	<h1>The breadbox object</h1>
+
+	<p>Within your application, you can use Node's built-in <code>require</code> function to access the <code>breadbox</code> object. If breadbox is located within a folder called <code>node_modules</code>, you can access it with <code>require('breadbox')</code>. Otherwise, you must indicate the path, such as <code>require('./knapsack/breadbox')</code>.</p>
+
+	<p>The <code>breadbox</code> object exposes the following methods and properties:</p>
+
+	<a name="init"></a>
+
+	<h3>breadbox.init</h3>
+
+	<p><code>breadbox.init([Object]);</code></p>
+
+	<p>This method accepts a config object and runs your app. The config object may have the following properties:</p>
+
+	<ul>
+		<li><code>controllers</code> (object): an object on which keys are the routes (URLs) of your app, and values are functions which perform the business logic for the corresponding route. <a href="#controllers">Read more below</a>.</li>
+		<li><code>loginPage</code> (string): the URL of the page at which users can log in. Defaults to <code>'/login'</code>.</li>
+		<li><code>logoutPage</code> (string): the URL of the page at which users can log out. Defaults to <code>'/logout'</code>.</li>
+		<li><code>port</code> (number): the port on which to run the app. Defaults to <code>1337</code>.</li>
+	</ul>
+
+</div>
+
+<div class="section">
+
+	<a name="db"></a>
+
+	<h3>breadbox.db</h3>
+
+	<p><code>breadbox.db</code> is an object that provides an extremely lightweight set of data access methods. It works by storing and manipulating <a href="http://www.json.org/" target="_blank">JSON</a> files in the <code>models</code> folder of your project's root directory. This approach, while convenient and fast, is not be a suitable substitute for a database for most production applications. Feel free to <code>require</code> and use any database that suits your needs.</p>
+
+	<p><code>breadbox.db</code> exposes the following methods:</p>
+
+	<ul>
+		<li><code>put([string] path, [any] data, [string] key)</code>: saves the provided data to the JSON file at the given path (relative to <code>models/</code>), optionally using a key to only update a portion of the JSON file.</li>
+			<ul>
+				<li><code>path</code> (string) indicates which JSON file in the <code>models</code> folder to update. <code>'index'</code> would update <code>/models/index.json</code>, while <code>'posts/1'</code> would update <code>/models/posts/1.json</code>.</li>
+				<li><code>data</code> (anything) is the data to save. If <code>key</code> is not supplied, the whole file will be overwritten, otherwise:</li>
+				<li><code>key</code> (string) inidcates the part of the JSON file to update. <code>breadbox.db.put('index', 1, 'posts[2].count')</code> would get the latest data from <code>index.json</code>, and set <code>data.posts[2].count</code> to <code>1</code>.</li>
+			</ul>
+		<li><code>get([string] path)</code>: returns the parsed JSON object at the given path.</li>
+		<li><code>drop([string] path)</code>: deletes the JSON file at the given path.</li>
+	</ul>
+
+</div>
+
+<div class="section">
+
+	<a name="promise"></a>
+
+	<h3>breadbox.promise</h3>
+
+	<p>One of the most common complaints about Node.js is that the benefits of non-blocking asyncronous I/O come at the cost of deeply nested callbacks and the constant need to check for and handle errors. While this is admittedly not an issue that an MVC framework needs to address, we wanted to solve it for our own purposes while developing Breadbox - so why not expose our tools to you?</p>
+
+	<p>The <code>breadbox.promise</code> method returns a simplified implementation of a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">promise object</a>. It exposes just two methods:</p>
+
+	<ul>
+		<li><code>then([function] callback)</code>: calls the supplied function with the result of an asyncronous operation.</li>
+		<li><code>resolve([any] data ... )</code>: calls <code>callback</code> with the given arguments.</li>
+	</ul>
+
+	<p>This implementation has one feature in particular that the ECMAScript 6 specification lacks, namely the ability to pass any number of values to <code>promise.resolve()</code>. This functionality increases flexibility and, especially when combined with Breadbox's <a href="#handle">error handlers</a>, removes the need for <code>promise.reject</code> and <code>promise.prototype.catch</code>.</p>
+
+	<p>For example, any time you make an asyncronous call you have to code for errors. Rather than dealing with rejecting the promise and catching the rejection, your code might look like this (using ES6):</p>
+
+<code>const breadbox = require('breadbox');
+
+function getData() {
+
+	let result = breadbox.promise();
+
+	doAsync('operation', (err, data) => {
+		<i>// Rather than checking for an error and calling result.reject(err), 
+		// we can do this, because breadbox promises can resolve with multiple values.</i>
+		result.resolve(err, data, 'This is a message');
+	});
+
+	return result;
+}
+
+getData().then((err, data, message) => {
+
+	breadbox.handle(err).then(() => {
+		<i>// Success! Do something with data here.</i>
+		console.log(message);
+	});
+});
+</code>
+
+</div>
