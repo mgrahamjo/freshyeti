@@ -12,7 +12,7 @@
 
 	<h3>breadbox.init</h3>
 
-	<p><code>breadbox.init([Object]);</code></p>
+	<p><code>breadbox.init( [Object] );</code></p>
 
 	<p>This method accepts a config object and runs your app. The config object may have the following properties:</p>
 
@@ -36,14 +36,14 @@
 	<p><code>breadbox.db</code> exposes the following methods:</p>
 
 	<ul>
-		<li><code>put([string] path, [any] data, [string] key)</code>: saves the provided data to the JSON file at the given path (relative to <code>models/</code>), optionally using a key to only update a portion of the JSON file.</li>
+		<li><a name="db-put"></a><code>put( [string] path, [any] data, ([string] key) )</code>: saves the provided data to the JSON file at the given path (relative to <code>models/</code>), optionally using a key to only update a portion of the JSON file.</li>
 			<ul>
 				<li><code>path</code> (string) indicates which JSON file in the <code>models</code> folder to update. <code>'index'</code> would update <code>/models/index.json</code>, while <code>'posts/1'</code> would update <code>/models/posts/1.json</code>.</li>
 				<li><code>data</code> (anything) is the data to save. If <code>key</code> is not supplied, the whole file will be overwritten, otherwise:</li>
 				<li><code>key</code> (string) inidcates the part of the JSON file to update. <code>breadbox.db.put('index', 1, 'posts[2].count')</code> would get the latest data from <code>index.json</code>, and set <code>data.posts[2].count</code> to <code>1</code>.</li>
 			</ul>
-		<li><code>get([string] path)</code>: returns the parsed JSON object at the given path.</li>
-		<li><code>drop([string] path)</code>: deletes the JSON file at the given path.</li>
+		<li><a name="db-get"></a><code>get( [string] path )</code>: returns the parsed JSON object at the given path.</li>
+		<li><a name="db-drop"></a><code>drop( [string] path )</code>: deletes the JSON file at the given path.</li>
 	</ul>
 
 </div>
@@ -59,8 +59,8 @@
 	<p>The <code>breadbox.promise</code> method returns a simplified implementation of a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">promise object</a>. It exposes just two methods:</p>
 
 	<ul>
-		<li><code>then([function] callback)</code>: calls the supplied function with the result of an asyncronous operation.</li>
-		<li><code>resolve([any] data ... )</code>: calls <code>callback</code> with the given arguments.</li>
+		<li><code>then( [function] callback )</code>: calls the supplied function with the result of an asyncronous operation.</li>
+		<li><code>resolve( [any] data, (...) )</code>: calls <code>callback</code> with the given arguments.</li>
 	</ul>
 
 	<p>This implementation has one feature in particular that the ECMAScript 6 specification lacks, namely the ability to pass any number of values to <code>promise.resolve()</code>. This functionality increases flexibility and, especially when combined with Breadbox's <a href="#handle">error handlers</a>, removes the need for <code>promise.reject</code> and <code>promise.prototype.catch</code>.</p>
@@ -88,6 +88,39 @@ getData().then((err, data, message) => {
 		<i>// Success! Do something with data here.</i>
 		console.log(message);
 	});
+});
+</code>
+
+</div>
+
+<div class="section">
+
+	<a name="error-handling"></a>
+
+	<h3>Error Handling</h3>
+
+	<p>Traditionally, error handling has been a pain in Node. All asyncronous operations need to be able to return errors, which means developers have to devote a lot of lines of code to error checking. <code>breadbox.handle</code> provides a convienent way to safely return a styled error page if necessary, or else continue running seamlessly.</p>
+
+	<p><code>breadbox.handle( [any] error, ([number] status), ([boolean] die) )</code>: returns a promise object that will resolve only if <code>error</code> is falsy. Accepts three arguments:</p>
+
+	<ul>
+		<li><code>error</code> (any): a value that may or may not represent an error. Typically this is returned from an operation and needs to be checked for truthiness before continuing normal execution.</li>
+		<li><code>status</code> (number): the HTTP status code that will be used if <code>error</code> is truthy. Defaults to <code>500</code>.</li>
+		<li><code>die</code> (boolean): if truthy, the error will be <code>throw</code>n rather than surfaced in the UI, meaning the server will crash. Sometimes it is necessary to crash and restart the app to prevent execution in a corrupt state.</li>
+	</ul>
+
+	<p>A typical use case (using ES6):</p>
+
+<code>const fs = require('fs'),
+breadbox = require('breadbox');
+
+fs.readFile('/path/to/file.json', { encoding: 'utf8' }, (err, data) => {
+
+	breadbox.handle(err).then(() => {
+
+		let successfulData = JSON.parse(data);
+	});
+
 });
 </code>
 
