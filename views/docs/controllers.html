@@ -1,0 +1,22 @@
+<div class="section">
+
+	<a name="controllers"></a>
+
+	<h1>Controllers</h1>
+
+	<p>The purpose of a controller is to get the data necessary to render a template. It does this by creating a <code>context</code> object and resolving it on the response. When creating a <code>context</code> object, a controller has access to stored data as well as a number of data sources on the request, such as the session, query string, POST data, or the URL itself.</p>
+
+	<p>All controllers must be passed to the configuration object on <code>breadbox.init</code>. For readability, it is recommended to use <code>require</code> to store them as modules in their own files:</p>
+
+<code>const init = require('breadbox').init;
+
+init({
+	controllers: {
+		'/index': require('./controllers/index')
+	}
+});
+</code>
+
+
+
+</div>

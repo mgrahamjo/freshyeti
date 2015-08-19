@@ -12,7 +12,7 @@
 
 	<h3>breadbox.init</h3>
 
-	<p><code>breadbox.init( [Object] );</code></p>
+	<p><code>breadbox.init( [Object] config );</code></p>
 
 	<p>This method accepts a config object and runs your app. The config object may have the following properties:</p>
 
@@ -42,9 +42,22 @@
 				<li><code>data</code> (anything) is the data to save. If <code>key</code> is not supplied, the whole file will be overwritten, otherwise:</li>
 				<li><code>key</code> (string) inidcates the part of the JSON file to update. <code>breadbox.db.put('index', 1, 'posts[2].count')</code> would get the latest data from <code>index.json</code>, and set <code>data.posts[2].count</code> to <code>1</code>.</li>
 			</ul>
-		<li><a name="db-get"></a><code>get( [string] path )</code>: returns the parsed JSON object at the given path.</li>
+		<li><a name="db-get"></a><code>get( [string] path )</code>: returns a promise that resolves to the parsed JSON object at the given path.</li>
 		<li><a name="db-drop"></a><code>drop( [string] path )</code>: deletes the JSON file at the given path.</li>
 	</ul>
+
+	<p>All <code>breadbox.db</code> methods return promise objects which resolve when the operation succeeds. They do not return errors - data access failures will result in a 500 page.</p>
+
+<code>const db = require('breadbox').db;
+
+<i>// Get a blog post</i>
+db.get('posts').then(posts => {
+	let article = {
+		title: posts[0].title,
+		body: posts[0].content
+	};
+});
+</code>
 
 </div>
 
@@ -54,7 +67,7 @@
 
 	<h3>breadbox.promise</h3>
 
-	<p>One of the most common complaints about Node.js is that the benefits of non-blocking asyncronous I/O come at the cost of deeply nested callbacks and the constant need to check for and handle errors. While this is admittedly not an issue that an MVC framework needs to address, we wanted to solve it for our own purposes while developing Breadbox - so why not expose our tools to you?</p>
+	<p>A common complaint about Node.js is that the benefits of non-blocking asyncronous I/O come at the cost of deeply nested callbacks. While this is admittedly not an issue that an MVC framework needs to address, this promise implementation was particularly helpful during the development of Breadbox, so it is exposed to users as well.</p>
 
 	<p>The <code>breadbox.promise</code> method returns a simplified implementation of a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">promise object</a>. It exposes just two methods:</p>
 
@@ -65,7 +78,7 @@
 
 	<p>This implementation has one feature in particular that the ECMAScript 6 specification lacks, namely the ability to pass any number of values to <code>promise.resolve()</code>. This functionality increases flexibility and, especially when combined with Breadbox's <a href="#handle">error handlers</a>, removes the need for <code>promise.reject</code> and <code>promise.prototype.catch</code>.</p>
 
-	<p>For example, any time you make an asyncronous call you have to code for errors. Rather than dealing with rejecting the promise and catching the rejection, your code might look like this (using ES6):</p>
+	<p>For example, any time you make an asyncronous call you have to code for errors. Rather than dealing with rejecting the promise and catching the rejection, your code might look like this:</p>
 
 <code>const breadbox = require('breadbox');
 
@@ -74,8 +87,8 @@ function getData() {
 	let result = breadbox.promise();
 
 	doAsync('operation', (err, data) => {
-		<i>// Rather than checking for an error and calling result.reject(err), 
-		// we can do this, because breadbox promises can resolve with multiple values.</i>
+		<i>// Rather than checking err, calling result.reject(err), and writing a .catch,
+		// we can either intercept the error here or pass it along thusly:</i>
 		result.resolve(err, data, 'This is a message');
 	});
 
@@ -83,7 +96,7 @@ function getData() {
 }
 
 getData().then((err, data, message) => {
-
+	<i>// breadbox.handle is our error interceptor</i>
 	breadbox.handle(err).then(() => {
 		<i>// Success! Do something with data here.</i>
 		console.log(message);
@@ -101,26 +114,62 @@ getData().then((err, data, message) => {
 
 	<p>Traditionally, error handling has been a pain in Node. All asyncronous operations need to be able to return errors, which means developers have to devote a lot of lines of code to error checking. <code>breadbox.handle</code> provides a convienent way to safely return a styled error page if necessary, or else continue running seamlessly.</p>
 
-	<p><code>breadbox.handle( [any] error, ([number] status), ([boolean] die) )</code>: returns a promise object that will resolve only if <code>error</code> is falsy. Accepts three arguments:</p>
+</div>
+
+<div class="section">
+
+	<a name="handle"></a>
+
+	<strong>breadbox.handle</strong>
+
+	<p><code>breadbox.handle( [any] error, ([number] status), ([boolean] die) )</code>: returns a promise object that will resolve only if <code>error</code> is falsy. It accepts three arguments:</p>
 
 	<ul>
 		<li><code>error</code> (any): a value that may or may not represent an error. Typically this is returned from an operation and needs to be checked for truthiness before continuing normal execution.</li>
 		<li><code>status</code> (number): the HTTP status code that will be used if <code>error</code> is truthy. Defaults to <code>500</code>.</li>
-		<li><code>die</code> (boolean): if truthy, the error will be <code>throw</code>n rather than surfaced in the UI, meaning the server will crash. Sometimes it is necessary to crash and restart the app to prevent execution in a corrupt state.</li>
+		<li><code>die</code> (boolean): if truthy, the error will be <code>throw</code>n rather than surfaced in the UI, meaning the server will crash. Sometimes it is best to crash and restart the app to prevent execution in a corrupt state.</li>
 	</ul>
 
-	<p>A typical use case (using ES6):</p>
+	<p>A typical use case:</p>
 
 <code>const fs = require('fs'),
-breadbox = require('breadbox');
+handle = require('breadbox').handle;
 
 fs.readFile('/path/to/file.json', { encoding: 'utf8' }, (err, data) => {
 
-	breadbox.handle(err).then(() => {
+	handle(err).then(() => {
 
 		let successfulData = JSON.parse(data);
 	});
 
+});
+</code>
+
+</div>
+
+<div class="section">
+
+	<a name="attempt"></a>
+
+	<strong>breadbox.attempt</strong>
+
+	<p><code>breadbox.attempt( [function] try, ([function] catch) )</code>: a wrapper for <code>try</code>/<code>catch</code>. If the execution of <code>try</code> raises an exception, <code>breadbox.attempt</code> passes the error to <code>catch</code>, or to <code>breadbox.handle</code> if <code>catch</code> is undefined.</p>
+
+	<p>Additionally, <code>breadbox.attempt</code> returns a promise which will be resolved with the result of a successful call to <code>try</code>.</p>
+
+<code>const attempt = require('breadbox').attempt;
+
+attempt(() => {
+
+	return global.possiblyDefined.data;
+
+}, err => {
+	
+	console.log('global.possiblyDefined is undefined');
+
+}).then(data => {
+	
+	console.log('global.possiblyDefined.data is ' + data);
 });
 </code>
 
