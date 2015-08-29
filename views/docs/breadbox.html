@@ -23,6 +23,7 @@
 		<li><code>port</code> (number): the port on which to run the app. Defaults to <code>1337</code>.</li>
 		<li><code>cacheLength</code> (number): the number of seconds to instruct browsers to cache assets for (via the 'Cache-Control' header). Defaults to <code>2419200</code> (four weeks).</li>
 		<li><code>cacheHtml</code> (boolean): whether or not to instruct browsers to cache HTML assets. Defaults to <code>true</code>.</li>
+		<li><code>sessionLength</code> (number): The length (in milliseconds) that session tokens are valid. Defaults to 10 minutes.</li>
 	</ul>
 
 </div>
@@ -124,11 +125,12 @@ getData().then((err, data, message) => {
 
 	<strong>breadbox.handle</strong>
 
-	<p><code>breadbox.handle( [any] error, ([number] status), ([boolean] die) )</code>: returns a promise object that will resolve only if <code>error</code> is falsy. It accepts three arguments:</p>
+	<p><code>breadbox.handle( [any] error, ([number] status), ([object] headers), ([boolean] die) )</code>: returns a promise object that will resolve only if <code>error</code> is falsy. It accepts three arguments:</p>
 
 	<ul>
 		<li><code>error</code> (any): a value that may or may not represent an error. Typically this is returned from an operation and needs to be checked for truthiness before continuing normal execution.</li>
 		<li><code>status</code> (number): the HTTP status code that will be used if <code>error</code> is truthy. Defaults to <code>500</code>.</li>
+		<li><code>headers</code> (object): any headers you would send. Defaults to <code>'Content-Type': 'text/html'</code>.</li>
 		<li><code>die</code> (boolean): if truthy, the error will be <code>throw</code>n rather than surfaced in the UI, meaning the server will crash. Sometimes it is best to crash and restart the app to prevent execution in a corrupt state.</li>
 	</ul>
 
