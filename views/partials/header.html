@@ -2,20 +2,10 @@
 <html>
 <head>
     <title>{{metaTitle}}</title>
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:300,700' rel='stylesheet' type='text/css'>
     <link href='/styles/style.css' rel='stylesheet' type='text/css'>
+    {{ if bodyClass === 'write' }}
+    	<link href='/styles/write.css' rel='stylesheet' type='text/css'>
+    {{endif}}
 </head>
-<body>
-
-<input type="checkbox" class="menu-toggle">
-<div class="nav">
-	<a href="/">Home</a>
-	<a href="/about">About</a>
-	<a href="/projects">Projects</a>
-	<a href="https://github.com/mgrahamjo">Github</a>
-</div>
-<div class="menu">
-	<div class="bar"></div>
-	<div class="bar"></div>
-	<div class="bar"></div>
-</div>
+<body class="{{bodyClass}}">

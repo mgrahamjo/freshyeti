@@ -5,10 +5,11 @@ module.exports = function(response) {
 	require('breadbox').db.get('posts').then(function(posts) {
 
 		var context = {
-			metaTitle: 'Mike Johnson, Javascript Developer',
+			bodyClass: 'write',
+			metaTitle: 'Write',
 			posts: posts
-		}
-		
+		};
+
 		response.resolve(context);
-	});	
+	});
 };

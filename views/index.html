@@ -1,19 +1,17 @@
 {{include partials/header}}
 
+{{include partials/menu}}
+
 <div class="background">
 
-	<div class="hero">
-
-		hey
-
-	</div>
+	<div class="hero"></div>
 
 	<div class="container">
 
 	<h1>Posts</h1>
 
-	{{for post in posts}}
-		<a href="/posts/{{post.id}}">{{post.title}}</a>
+	{{for id.post in posts}}
+		<a href="/posts/{{id}}">{{post.title}}</a>
 	{{endfor}}
 
 	</div>

@@ -1,0 +1,11 @@
+{{include partials/header}}
+
+<a class="right" href="/write/new-post">New Post</a>
+
+<ul class="wrapper">
+	{{for id.post in posts}}
+		<li><a href="/write/{{id}}">{{post.title}}</a></li>
+	{{endfor}}
+</ul>
+
+{{include partials/footer}}

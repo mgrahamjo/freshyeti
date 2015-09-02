@@ -1,0 +1,28 @@
+{{include partials/header}}
+
+<a class="right" href="/write">Back</a>
+
+<form action="/write/{{id}}" method="post" class="wrapper">
+
+	{{if saved}}
+	    <div class="saved">Saved!</div>
+	{{endif}}
+
+	<input type="hidden" name="token" value="{{token}}">
+
+	<input type="hidden" name="oldId" value="{{id}}">
+
+	<label>Title</label>
+	<input type="text" name="title" value="{{post.title}}">
+
+	<label>ID</label>
+	<input type="text" name="id" value="{{id}}">
+
+	<label>Body</label>
+	<textarea name="body">{{post.body}}</textarea>
+
+	<input type="submit" value="save">
+
+</form>
+
+{{include partials/footer}}
