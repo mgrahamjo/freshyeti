@@ -19,6 +19,25 @@ a {
     color: #4F9DCE;
 }
 
+.logo {
+    font-size: 12pt;
+    font-weight: bold;
+    border: 3px solid white;
+    display: inline-block;
+    padding: 5px 10px;
+    text-shadow: 1px 1px 15px black;
+    box-shadow: 1px 1px 16px black;
+    background-color: rgba(0,0,0,.4);
+}
+
+.logo-script {
+    font-size: 8pt;
+    letter-spacing: 1px;
+    margin: 3px 0 0 0;
+    color: #53758C;
+    text-shadow: 1px 1px 1px black;
+}
+
 a:hover, input[type="submit"]:hover {
     cursor: pointer;
     filter: contrast(1.1);
@@ -114,14 +133,40 @@ a:hover, input[type="submit"]:hover {
 .hero {
 	color: white;
     text-align: center;
-    padding: 150px 0;
+    padding: 144px 0;
     font-size: 20px;
 }
 
-.container {
+.content {
     background-color: #EAEAEA;
+}
+
+.footer {
+    background-color: #3D4952;
+    text-align: center;
+}
+
+.footer a {
+    font-size: 9pt;
+    color: #8195A5;
+    padding: 0 40px;
+    border-right: 1px solid #515A67;
+}
+
+.footer a:last-child {
+    border: none;
+}
+
+.footer a:hover {
+    color: #A3B1BB;
+}
+
+.container {
     padding: 35px calc(50% - 300px);
     color: #6B6B6B;
+}
+
+.hero + .container {
     box-shadow: 0 0 150px rgba(0,0,0,.5);
     -o-box-shadow: 0 0 150px rgba(0,0,0,.5);
     -moz-box-shadow: 0 0 150px rgba(0,0,0,.5);

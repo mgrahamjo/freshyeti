@@ -21,6 +21,8 @@ module.exports = function(response, request) {
 				token: token,
 			};
 
+			context.post.date = context.post.date || new Date().toDateString();
+
 			if (request.body) {
 
 				var post = {

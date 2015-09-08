@@ -7,7 +7,8 @@ module.exports = function(response) {
 		var context = {
 			bodyClass: 'write',
 			metaTitle: 'Write',
-			posts: posts
+			posts: posts,
+			css: ['/styles/write.css'],
 		};
 
 		response.resolve(context);
