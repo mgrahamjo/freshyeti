@@ -11,9 +11,12 @@
     margin-bottom: 20px;
     border-radius: 4px;
     border: 1px solid #E6E6E6;
+    box-sizing: border-box;
+}
+
+.write, .write input, .write textarea, .saved, .note-editor .note-editing-area .note-editable {
     font-family: 'Oxygen', sans-serif;
     color: #484848;
-    box-sizing: border-box;
 }
 
 .write input[type="submit"], .saved {
@@ -21,6 +24,13 @@
     border: 1px solid #7FC17F;
     color: #58A758;
     box-shadow: inset 1px 1px 0px #C8F5C6;
+}
+
+.write input[type="submit"].error {
+    background-color: #FF7B7B;
+    color: #922424;
+    border-color: red;
+    box-shadow: inset 1px 1px 0px #FFC9C9;
 }
 
 .write label {

@@ -6,18 +6,18 @@ module.exports = function(response, request) {
 
 	bb.db.get('posts').then(function(posts) {
 
-
 		bb.csrf.makeToken(request).then(function(headers, token) {
 
 			var context = {
 				bodyClass: 'write',
 				metaTitle: 'Edit',
 				id: request.params.id,
-				post: posts[request.params.id] ? posts[request.params.id] : {
+				post: posts ? posts[request.params.id] : {
 					'new-post': {
 						title: 'new-post'
 					}
 				},
+				css: ['//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css', '//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css', '/styles/summernote.css', '/styles/write.css'],
 				token: token,
 			};
 
@@ -32,7 +32,7 @@ module.exports = function(response, request) {
 
 				bb.db.put('posts', post, request.body.id).then(function() {
 
-					response.redirect('write/' + request.body.id, 200);
+					request.redirect('/write/' + request.body.id);
 				});
 
 			} else {

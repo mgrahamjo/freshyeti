@@ -2,7 +2,7 @@
 
 <a class="right" href="/write">Back</a>
 
-<form action="/write/{{id}}" method="post" class="wrapper">
+<form action="/write/{{id}}" method="post" class="wrapper" onsubmit="return validate()">
 
 	{{if saved}}
 	    <div class="saved">Saved!</div>
@@ -19,10 +19,58 @@
 	<input type="text" name="id" value="{{id}}">
 
 	<label>Body</label>
-	<textarea name="body">{{post.body}}</textarea>
+	<textarea name="body" id="summernote">{{post.body|safe}}</textarea>
 
 	<input type="submit" value="save">
 
 </form>
+
+<script src="//code.jquery.com/jquery-1.9.1.min.js"></script> 
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script> 
+<script src="/js/summernote.min.js"></script>
+<script>
+$(document).ready(function() {
+  $('#summernote').summernote({
+  	height: 500,
+  	toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'italic', 'underline', 'clear']],
+        // ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+        // ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        // ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        // ['height', ['height']],
+        // ['table', ['table']],
+        ['insert', ['link', 'picture', 'hr']],
+        ['view', ['fullscreen', 'codeview']],
+        // ['help', ['help']]
+      ]
+  });
+});
+
+function validate() {
+
+    var valid = true;
+
+    $('[name="title"], [name="id"]').each(function(i, input) {
+        if ($(input).val().length === 0) {
+            valid = false;
+        }
+    });
+
+    if ($('[name="id"]').val().indexOf(' ') !== -1) {
+        valid = false;
+    }
+
+    if (!valid) {
+        $('[type="submit"]').addClass('error');
+    } else {
+        $('[type="submit"]').removeClass('error');
+    }
+
+    return valid;
+}
+</script>
 
 {{include partials/footer}}
