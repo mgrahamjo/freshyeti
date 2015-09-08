@@ -23,7 +23,7 @@
 		<li><code>port</code> (number): the port on which to run the app. Defaults to <code>1337</code>.</li>
 		<li><code>cacheLength</code> (number): the number of seconds to instruct browsers to cache assets for (via the 'Cache-Control' header). Defaults to <code>2419200</code> (four weeks).</li>
 		<li><code>cacheHtml</code> (boolean): whether or not to instruct browsers to cache HTML assets. Defaults to <code>true</code>.</li>
-		<li><code>sessionLength</code> (number): The length (in milliseconds) that session tokens are valid. Defaults to 10 minutes.</li>
+		<li><code>sessionLength</code> (number): The length (in milliseconds) that inactive sessions remain valid. Defaults to 10 minutes.</li>
 	</ul>
 
 </div>
@@ -34,19 +34,19 @@
 
 	<h3>breadbox.db</h3>
 
-	<p><code>breadbox.db</code> is an object that provides an extremely lightweight set of data access methods. It works by storing and manipulating <a href="http://www.json.org/" target="_blank">JSON</a> files in the <code>models</code> folder of your project's root directory. This approach, while convenient and fast, is not be a suitable substitute for a database for most production applications. Feel free to <code>require</code> and use any database that suits your needs.</p>
+	<p><code>breadbox.db</code> is an object that provides a set of lightweight data access methods. It works by storing and manipulating <a href="http://www.json.org/" target="_blank">JSON</a> files in the <code>models</code> folder of your project's root directory. This approach, while convenient and fast, is not a suitable substitute for a database for many production applications. Feel free to use any database that suits your needs.</p>
 
 	<p><code>breadbox.db</code> exposes the following methods:</p>
 
 	<ul>
-		<li><a name="db-put"></a><code>put( [string] path, [any] data, ([string] key) )</code>: saves the provided data to the JSON file at the given path (relative to <code>models/</code>), optionally using a key to only update a portion of the JSON file.</li>
+		<li><a name="db-put"></a><code>db.put( [string] path, [any] data, ([string] key) )</code>: saves the provided data to a JSON file at the given path (relative to <code>models/</code>), optionally using a key to only update a portion of the JSON file.</li>
 			<ul>
 				<li><code>path</code> (string) indicates which JSON file in the <code>models</code> folder to update. <code>'index'</code> would update <code>/models/index.json</code>, while <code>'posts/1'</code> would update <code>/models/posts/1.json</code>.</li>
 				<li><code>data</code> (anything) is the data to save. If <code>key</code> is not supplied, the whole file will be overwritten, otherwise:</li>
-				<li><code>key</code> (string) inidcates the part of the JSON file to update. <code>breadbox.db.put('index', 1, 'posts[2].count')</code> would get the latest data from <code>index.json</code>, and set <code>data.posts[2].count</code> to <code>1</code>.</li>
+				<li><code>key</code> (string) inidcates the part of the JSON file to update. <code>breadbox.db.put('index', 1, 'posts[2].count')</code> would first get the latest data from <code>index.json</code>, then set <code>data.posts[2].count</code> to <code>1</code>. Always be as specific as possible when using the <code>put</code> method - this safeguards against concurrent users over-writing each other's changes.</li>
 			</ul>
-		<li><a name="db-get"></a><code>get( [string] path )</code>: returns a promise that resolves to the parsed JSON object at the given path.</li>
-		<li><a name="db-drop"></a><code>drop( [string] path )</code>: deletes the JSON file at the given path.</li>
+		<li><a name="db-get"></a><code>db.get( [string] path )</code>: returns a promise that resolves to the parsed JSON object at the given path.</li>
+		<li><a name="db-drop"></a><code>db.drop( [string] path )</code>: deletes the JSON file at the given path.</li>
 	</ul>
 
 	<p>All <code>breadbox.db</code> methods return promise objects which resolve when the operation succeeds. They do not return errors - data access failures will result in a 500 page.</p>
@@ -72,14 +72,14 @@ db.get('posts').then(posts => {
 
 	<p>A common complaint about Node.js is that the benefits of non-blocking asyncronous I/O come at the cost of deeply nested callbacks. While this is admittedly not an issue that an MVC framework needs to address, this promise implementation was particularly helpful during the development of Breadbox, so it is exposed to users as well.</p>
 
-	<p>The <code>breadbox.promise</code> method returns a simplified implementation of a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">promise object</a>. It exposes just two methods:</p>
+	<p>The <code>breadbox.promise</code> method returns a simplified implementation of a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">promise object</a>. It has just two methods:</p>
 
 	<ul>
 		<li><code>then( [function] callback )</code>: calls the supplied function with the result of an asyncronous operation.</li>
 		<li><code>resolve( [any] data, (...) )</code>: calls <code>callback</code> with the given arguments.</li>
 	</ul>
 
-	<p>This implementation has one feature in particular that the ECMAScript 6 specification lacks, namely the ability to pass any number of values to <code>promise.resolve()</code>. This functionality increases flexibility and, especially when combined with Breadbox's <a href="#handle">error handlers</a>, removes the need for <code>promise.reject</code> and <code>promise.prototype.catch</code>.</p>
+	<p>This implementation has one feature in particular that the ECMAScript 6 specification lacks: the ability to pass any number of values to <code>promise.resolve()</code>. This functionality increases flexibility and, especially when combined with Breadbox's <a href="#handle">error handlers</a>, removes the need for <code>promise.reject</code> and <code>promise.prototype.catch</code>.</p>
 
 	<p>For example, any time you make an asyncronous call you have to code for errors. Rather than dealing with rejecting the promise and catching the rejection, your code might look like this:</p>
 
@@ -130,8 +130,8 @@ getData().then((err, data, message) => {
 	<ul>
 		<li><code>error</code> (any): a value that may or may not represent an error. Typically this is returned from an operation and needs to be checked for truthiness before continuing normal execution.</li>
 		<li><code>status</code> (number): the HTTP status code that will be used if <code>error</code> is truthy. Defaults to <code>500</code>.</li>
-		<li><code>headers</code> (object): any headers you would send. Defaults to <code>'Content-Type': 'text/html'</code>.</li>
-		<li><code>die</code> (boolean): if truthy, the error will be <code>throw</code>n rather than surfaced in the UI, meaning the server will crash. Sometimes it is best to crash and restart the app to prevent execution in a corrupt state.</li>
+		<li><code>headers</code> (object): any headers you want to send. Defaults to <code>'Content-Type': 'text/html'</code>.</li>
+		<li><code>die</code> (boolean): if truthy, the error will cause the server to crash rather than returning an error page. Sometimes it is best to crash and restart the app to prevent execution in a corrupt state.</li>
 	</ul>
 
 	<p>A typical use case:</p>

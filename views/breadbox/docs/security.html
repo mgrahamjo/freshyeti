@@ -39,7 +39,7 @@ module.exports = (response, request) => {
 
 <code><i>&lt;!-- form.html: --></i>
 &lt;form action="/" method="post">
-	&lt;input type="hidden" name="token" value="{{token}}">
+	&lt;input type="hidden" name="token" value="{{token|skip}}">
 	&lt;input type="text" name="data">
 	&lt;input type="submit">
 &lt;/form>
