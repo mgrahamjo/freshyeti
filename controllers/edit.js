@@ -1,14 +1,14 @@
 'use strict';
 
-var bb = require('breadbox');
+const bb = require('breadbox');
 
-module.exports = function(response, request) {
+module.exports = (response, request) => {
 
-	bb.db.get('posts').then(function(posts) {
+	bb.db.get('posts').then(posts => {
 
-		bb.csrf.makeToken(request).then(function(headers, token) {
+		bb.csrf.makeToken(request).then((headers, token) => {
 
-			var context = {
+			let context = {
 				bodyClass: 'write',
 				metaTitle: 'Edit',
 				id: request.params.id,
@@ -19,22 +19,22 @@ module.exports = function(response, request) {
 				},
 				css: ['//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css', '//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css', '/styles/summernote.css', '/styles/write.css'],
 				token: token,
+				saved: request.query.saved
 			};
 
 			context.post.date = context.post.date || new Date().toDateString();
 
 			if (request.body) {
 
-				var post = {
+				let post = {
 					title: request.body.title,
 					body: request.body.body
 				};
 
-				bb.db.drop('posts', request.body.oldId);
-
-				bb.db.put('posts', post, request.body.id).then(function() {
-
-					request.redirect('/write/' + request.body.id);
+				bb.db.drop('posts', request.body.oldId).then(() => {
+					bb.db.put('posts', post, request.body.id).then(() => {
+						request.redirect('/write/' + request.body.id + '?saved=true');
+					});
 				});
 
 			} else {
