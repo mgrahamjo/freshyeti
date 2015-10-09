@@ -18,8 +18,7 @@ module.exports = (response, request) => {
 					}
 				},
 				css: ['//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css', '//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css', '/styles/summernote.css', '/styles/write.css'],
-				token: token,
-				saved: request.query.saved
+				token: token
 			};
 
 			context.post.date = context.post.date || new Date().toDateString();
@@ -28,12 +27,13 @@ module.exports = (response, request) => {
 
 				let post = {
 					title: request.body.title,
-					body: request.body.body
+					body: request.body.body,
+					date: request.body.date
 				};
 
 				bb.db.drop('posts', request.body.oldId).then(() => {
 					bb.db.put('posts', post, request.body.id).then(() => {
-						request.redirect('/write/' + request.body.id + '?saved=true');
+						request.redirect('/write/' + request.body.id);
 					});
 				});
 

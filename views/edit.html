@@ -2,11 +2,9 @@
 
 <a class="right" href="/write">Back</a>
 
-<form action="/write/{{id}}" method="post" class="wrapper" onsubmit="return validate()">
+<form action="/write/{{id}}" method="post" class="wrapper">
 
-	{{if saved}}
-	    <div class="saved">Saved!</div>
-	{{endif}}
+	<div class="saved">Saved!</div>
 
 	<input type="hidden" name="token" value="{{token}}">
 
@@ -32,7 +30,9 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script> 
 <script src="/js/summernote.min.js"></script>
 <script>
+
 $(document).ready(function() {
+
   $('#summernote').summernote({
   	height: 500,
   	toolbar: [
@@ -50,30 +50,103 @@ $(document).ready(function() {
         // ['help', ['help']]
       ]
   });
+
+  $('input').not('[type="submit"]').on('blur', $.mj.save);
+
+  $('input[type="submit"]').on('click', function(e) {
+    e.preventDefault();
+    $.mj.save();
+  });
+
+  $.mj.setContent($('#summernote').val());
+
+  $.mj.setTimer();
+
+  setInterval(function() {
+    $.mj.checkContent($('#summernote').val());
+  }, 30000);
+
 });
 
-function validate() {
+(function($) {
 
-    var valid = true;
+    var content,
+        timer;
 
-    $('[name="title"], [name="id"]').each(function(i, input) {
-        if ($(input).val().length === 0) {
+    function validate() {
+
+        var valid = true;
+
+        $('[name="title"], [name="id"]').each(function(i, input) {
+            if ($(input).val().length === 0) {
+                $(input).addClass('error');
+                valid = false;
+            } else {
+                $(input).removeClass('error');
+            }
+        });
+
+        if ($('[name="id"]').val().indexOf(' ') !== -1) {
+            $('[name="id"]').addClass('error');
             valid = false;
+        } else {
+            $('[name="id"]').removeClass('error');
         }
-    });
 
-    if ($('[name="id"]').val().indexOf(' ') !== -1) {
-        valid = false;
+        if (!valid) {
+            $('[type="submit"]').addClass('error');
+        } else {
+            $('[type="submit"]').removeClass('error');
+        }
+
+        return valid;
     }
 
-    if (!valid) {
-        $('[type="submit"]').addClass('error');
-    } else {
-        $('[type="submit"]').removeClass('error');
+    function save() {
+        if (validate()) {
+            $.post('/write/{{id}}', $('form').serialize())
+                .done(function() {
+                    $('.saved').fadeIn('fast');
+                    setTimeout(function() {
+                        $('.saved').fadeOut();
+                    }, 6000);
+                });
+        }
     }
 
-    return valid;
-}
+    function setTimer() {
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+            var redirectTimer = setTimeout(function() {
+                location.reload();
+            }, 60000);
+            alert('Do something or you\'re gonna get logged out!');
+            clearTimeout(redirectTimer);
+        }, 540000);
+    }
+
+    function checkContent(newContent) {
+        if (content && newContent !== content) {
+            save();
+            setTimer();
+        }
+        content = newContent;
+    }
+
+    function setContent(data) {
+        content = data;
+    }
+
+    $.mj = {
+        checkContent: checkContent,
+        setContent: setContent,
+        validate: validate,
+        setTimer: setTimer,
+        save: save
+    };
+
+})($);
+
 </script>
 
 </body>
