@@ -46,7 +46,7 @@
 				<li><code>key</code> (string) inidcates the part of the JSON file to update. <code>breadbox.db.put('index', 1, 'posts[2].count')</code> would first get the latest data from <code>index.json</code>, then set <code>data.posts[2].count</code> to <code>1</code>. Always be as specific as possible when using the <code>put</code> method - this safeguards against concurrent users over-writing each other's changes.</li>
 			</ul>
 		<li><a name="db-get"></a><code>db.get( [string] path )</code>: returns a promise that resolves to the parsed JSON object at the given path.</li>
-		<li><a name="db-drop"></a><code>db.drop( [string] path )</code>: deletes the JSON file at the given path.</li>
+		<li><a name="db-drop"></a><code>db.drop( [string] path, [string] key )</code>: if <code>key</code> is provided, deletes the corresponding property of the JSON object at <code>path</code>. If not, deletes the JSON file at <code>path</code>.</li>
 	</ul>
 
 	<p>All <code>breadbox.db</code> methods return promise objects which resolve when the operation succeeds. They do not return errors - data access failures will result in a 500 page.</p>
