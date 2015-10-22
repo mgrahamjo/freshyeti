@@ -20,35 +20,22 @@
     <input type="text" name="date" value="{{post.date}}">
 
 	<label>Body</label>
-	<textarea name="body" id="summernote">{{post.body|safe}}</textarea>
+	<textarea name="body" id="editor">{{post.body|safe}}</textarea>
 
 	<input type="submit" value="save">
 
 </form>
 
-<script src="//code.jquery.com/jquery-1.9.1.min.js"></script> 
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script> 
-<script src="/js/summernote.min.js"></script>
+<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="/js/markdown.min.js"></script>
 <script>
+
+var editor;
 
 $(document).ready(function() {
 
-  $('#summernote').summernote({
-  	height: 500,
-  	toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'italic', 'underline', 'clear']],
-        // ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-        // ['fontname', ['fontname']],
-        ['fontsize', ['fontsize']],
-        // ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        // ['height', ['height']],
-        // ['table', ['table']],
-        ['insert', ['link', 'picture', 'hr']],
-        ['view', ['fullscreen', 'codeview']],
-        // ['help', ['help']]
-      ]
+  editor = new SimpleMDE({
+    element: document.getElementById('editor')
   });
 
   $('input').not('[type="submit"]').on('blur', $.mj.save);
@@ -58,12 +45,12 @@ $(document).ready(function() {
     $.mj.save();
   });
 
-  $.mj.setContent($('#summernote').val());
+  $.mj.setContent($('#editor').val());
 
   $.mj.setTimer();
 
   setInterval(function() {
-    $.mj.checkContent($('#summernote').val());
+    $.mj.checkContent($('#editor').val());
   }, 30000);
 
 });
@@ -103,6 +90,8 @@ $(document).ready(function() {
     }
 
     function save() {
+        $('[title="Toggle Preview (⌘+P)"]').click();
+        $('#editor').val($('.editor-preview').html());
         if (validate()) {
             $.post('/write/{{id}}', $('form').serialize())
                 .done(function() {

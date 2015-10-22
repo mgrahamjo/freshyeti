@@ -17,7 +17,10 @@ module.exports = (response, request) => {
 						title: 'new-post'
 					}
 				},
-				css: ['//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css', '//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css', '/styles/summernote.css', '/styles/write.css'],
+				css: [
+					'/styles/write.css',
+					'/styles/markdown.min.css'
+				],
 				token: token
 			};
 
