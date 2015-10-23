@@ -28,11 +28,14 @@
 
 <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="/js/markdown.min.js"></script>
+<script src="/js/toMarkdown.js"></script>
 <script>
 
 var editor;
 
 $(document).ready(function() {
+
+  $('#editor').val(toMarkdown($('#editor').val(), { gfm: true }));
 
   editor = new SimpleMDE({
     element: document.getElementById('editor')
@@ -50,6 +53,7 @@ $(document).ready(function() {
   $.mj.setTimer();
 
   setInterval(function() {
+    $('#editor').val(editor.markdown(editor.value()));
     $.mj.checkContent($('#editor').val());
   }, 30000);
 
@@ -90,8 +94,7 @@ $(document).ready(function() {
     }
 
     function save() {
-        $('[title="Toggle Preview (⌘+P)"]').click();
-        $('#editor').val($('.editor-preview').html());
+        $('#editor').val(editor.markdown(editor.value()));
         if (validate()) {
             $.post('/write/{{id}}', $('form').serialize())
                 .done(function() {
