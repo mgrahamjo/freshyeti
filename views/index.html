@@ -13,9 +13,11 @@
 
 		<h1>Posts</h1>
 
+		<ul>
 		{{for id.post in posts}}
-			<a href="/posts/{{id}}">{{post.title}}</a>
+			<li><a href="/posts/{{id}}">{{post.title}}</a></li>
 		{{endfor}}
+		</ul>
 
 	</div>
 

@@ -1,18 +1,20 @@
 'use strict';
 
+const fs = require('fs'),
+	getPosts = require('./modules/get-posts');
+
 module.exports = function(response) {
 
-	require('breadbox').db.get('posts').then(function(posts) {
+	let context = {
+		bodyClass: 'write',
+		metaTitle: 'Write',
+		css: [
+			'/styles/write.css'
+		]
+	};
 
-		var context = {
-			bodyClass: 'write',
-			metaTitle: 'Write',
-			posts: posts,
-			css: [
-				'/styles/write.css'
-			],
-		};
-
+	getPosts().then(posts => {
+		context.posts = posts;
 		response.resolve(context);
 	});
 };

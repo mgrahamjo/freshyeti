@@ -1,14 +1,16 @@
 'use strict';
 
+const fs = require('fs'),
+	getPosts = require('./modules/get-posts');
+
 module.exports = function(response) {
 
-	require('breadbox').db.get('posts').then(function(posts) {
+	let context = {
+		metaTitle: 'Mike Johnson, Javascript Developer'
+	};
 
-		var context = {
-			metaTitle: 'Mike Johnson, Javascript Developer',
-			posts: posts
-		}
-		
+	getPosts().then(posts => {
+		context.posts = posts;
 		response.resolve(context);
-	});	
+	});
 };

@@ -20,6 +20,7 @@
     <input type="text" name="date" value="{{post.date}}">
 
 	<label>Body</label>
+    <a class="editorMark"></a>
 	<textarea name="body" id="editor">{{post.body|safe}}</textarea>
 
 	<input type="submit" value="save">
@@ -33,15 +34,26 @@
 
 var editor;
 
+function checkScroll() {
+    if ($('body').scrollTop() >= $('.editorMark').offset().top) {
+        $('.editor-toolbar').addClass('fixed');
+    } else {
+        $('.editor-toolbar').removeClass('fixed');
+    }
+}
+
 $(document).ready(function() {
 
   $('#editor').val(toMarkdown($('#editor').val(), { gfm: true }));
 
   editor = new SimpleMDE({
-    element: document.getElementById('editor')
+    element: document.getElementById('editor'),
+    spellChecker: false
   });
 
-  $('input').not('[type="submit"]').on('blur', $.mj.save);
+  $('[name="id"]').on('blur', function() {
+    $.mj.save(true);
+  });
 
   $('input[type="submit"]').on('click', function(e) {
     e.preventDefault();
@@ -56,6 +68,8 @@ $(document).ready(function() {
     $('#editor').val(editor.markdown(editor.value()));
     $.mj.checkContent($('#editor').val());
   }, 30000);
+
+  $(window).on('scroll', checkScroll);
 
 });
 
@@ -93,11 +107,14 @@ $(document).ready(function() {
         return valid;
     }
 
-    function save() {
+    function save(newPostID) {
         $('#editor').val(editor.markdown(editor.value()));
         if (validate()) {
             $.post('/write/{{id}}', $('form').serialize())
                 .done(function() {
+                    if (newPostID) {
+                        window.location = '/write/' + $('[name="id"]').val();
+                    }
                     $('.saved').fadeIn('fast');
                     setTimeout(function() {
                         $('.saved').fadeOut();

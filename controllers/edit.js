@@ -4,7 +4,9 @@ const bb = require('breadbox');
 
 module.exports = (response, request) => {
 
-	bb.db.get('posts').then(posts => {
+	let postFile = 'posts/' + request.params.id;
+
+	bb.db.get(postFile).then(post => {
 
 		bb.csrf.makeToken(request).then((headers, token) => {
 
@@ -12,7 +14,7 @@ module.exports = (response, request) => {
 				bodyClass: 'write',
 				metaTitle: 'Edit',
 				id: request.params.id,
-				post: posts ? posts[request.params.id] : {
+				post: post ? post[request.params.id] : {
 					'new-post': {
 						title: 'new-post'
 					}
@@ -24,18 +26,28 @@ module.exports = (response, request) => {
 				token: token
 			};
 
-			context.post.date = context.post.date || new Date().toDateString();
+			let newDate = new Date().toDateString();
+
+			if (context.post) {
+				context.post.date = context.post.date || newDate;
+			} else {
+				context.post = {
+					date: newDate
+				};
+			}
 
 			if (request.body) {
 
-				let post = {
+				let newPost = {};
+
+				newPost[request.body.id] = {
 					title: request.body.title,
 					body: request.body.body,
 					date: request.body.date
 				};
 
-				bb.db.drop('posts', request.body.oldId).then(() => {
-					bb.db.put('posts', post, request.body.id).then(() => {
+				bb.db.drop('posts/' + request.params.id).then(() => {
+					bb.db.put('posts/' + request.body.id, newPost).then(() => {
 						request.redirect('/write/' + request.body.id);
 					});
 				});

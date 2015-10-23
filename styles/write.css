@@ -22,7 +22,7 @@
 .write input[type="submit"], .saved {
 	background-color: #9EE69E;
     border: 1px solid #7FC17F;
-    color: #58A758;
+    color: #67AF82;
     box-shadow: inset 1px 1px 0px #C8F5C6;
 }
 
@@ -46,12 +46,14 @@
 }
 
 .saved {
+    background-color: transparent;
     border: 0;
     box-shadow: none;
-    text-align: center;
+    text-align: right;
     display: none;
     position: fixed;
-    z-index: 2;
-    width: 50%;
-    top: 0;
+    z-index: 3;
+    width: 49%;
+    top: 3px;
+    pointer-events: none;
 }
