@@ -2,6 +2,8 @@
 
 {{include partials/menu}}
 
+<div id="parallax"></div>
+
 <div class="wrapper">
 
 	<div class="hero">
@@ -87,13 +89,18 @@
 
 </div>
 
-<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
 <script>
-$(function(){
-	$(window).on('scroll', function() {
-		$('body').css('background-position', '0 ' + parseInt($('body').scrollTop() / 3) + 'px');
+if (window.pageYOffset) {
+
+	var el = document.getElementById('parallax');
+
+	window.addEventListener('scroll', function() {
+		window.requestAnimationFrame(function() {
+			var offset = Math.floor(window.pageYOffset / 5);
+			el.setAttribute('style', 'transform:translate3d(0, -' + offset + 'px, 0);height:' + (document.body.clientHeight + offset) + 'px');
+		})
 	});
-});
+}
 </script>
 
 {{include partials/footer}}
