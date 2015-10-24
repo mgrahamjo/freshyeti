@@ -8,7 +8,7 @@ module.exports = function() {
 	let posts = {},
 		result = bb.promise();
 
-	fs.readdir('././models/posts', (err, files) => {
+	fs.readdir('./././models/posts', (err, files) => {
 
 		files.forEach(file => {
 			
@@ -19,6 +19,7 @@ module.exports = function() {
 				posts[postId] = post[postId];
 
 				if (files.indexOf(file) === files.length - 1) {
+
 					result.resolve(posts);
 				}
 			});

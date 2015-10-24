@@ -1,0 +1,28 @@
+{{include partials/header}}
+
+{{include partials/menu}}
+
+<div class="wrapper">
+
+	<div class="hero">
+		<div class="logo">{{post.title}}</div>
+		<div class="logo-script">{{post.date}}</div>
+	</div>
+
+	<div class="content">
+
+		<div class="container clear">
+
+		<!-- 	<h1>{{post.title}}</h1>
+
+			<p class="date">{{post.date}}</p> -->
+
+			<div class="post">{{post.body|safe}}</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+{{include partials/footer}}

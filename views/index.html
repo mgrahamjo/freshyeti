@@ -2,25 +2,96 @@
 
 {{include partials/menu}}
 
-<div class="background">
+<div class="wrapper">
 
 	<div class="hero">
 		<div class="logo">MIKE JOHNSON</div>
 		<div class="logo-script">JAVASCRIPT DEVELOPER</div>
 	</div>
 
-	<div class="content container">
+	<div class="content">
 
-		<h1>Posts</h1>
+		<div class="container clear">
 
-		<ul>
-		{{for id.post in posts}}
-			<li><a href="/posts/{{id}}">{{post.title}}</a></li>
-		{{endfor}}
-		</ul>
+			<div class="headshot left"></div>
+
+			<p class="right">I'm Mike, and I have some stuff to say about JavaScript.</p>
+
+		</div>
+
+		<div class="container">
+
+			<h3>Blog</h3>
+
+			<a class="view-all" href="/blog">view all</a>
+
+			<ul class="bloglist">
+			{{for id.post in posts}}
+				<li><a href="/post/{{id}}">{{post.title}}</a></li>
+			{{endfor}}
+			</ul>
+
+		</div>
+
+		<div class="container">
+
+			<h3>Projects</h3>
+
+			<a class="view-all" href="/projects">view all</a>
+
+			<a href="/breadbox" class="project-link">
+				Breadbox
+				<div class="desc">A Node MVC Framework</div>
+			</a>
+
+			<a href="/braze" class="project-link">
+				Braze
+				<div class="desc">Declaritve DOM manipulation</div>
+			</a>
+
+			<a href="/barley" class="project-link">
+				Barley
+				<div class="desc">Node Template Engine</div>
+			</a>
+
+			<a href="/crash" class="project-link">
+				Crash
+				<div class="desc">Error Handler for Node</div>
+			</a>
+
+			<a href="/premise" class="project-link">
+				Premise
+				<div class="desc">A New Promise</div>
+			</a>
+
+			<a href="/headcheese" class="project-link">
+				Headcheese
+				<div class="desc">Persistent In-memory Sessions</div>
+			</a>
+
+			<a href="/payload" class="project-link">
+				Payload
+				<div class="desc">A Simpler Module Loader</div>
+			</a>
+
+			<a href="/knapsack" class="project-link">
+				Knapsack
+				<div class="desc">A Git Package Manager</div>
+			</a>
+
+		</div>
 
 	</div>
 
 </div>
+
+<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+$(function(){
+	$(window).on('scroll', function() {
+		$('body').css('background-position', '0 ' + parseInt($('body').scrollTop() / 3) + 'px');
+	});
+});
+</script>
 
 {{include partials/footer}}
