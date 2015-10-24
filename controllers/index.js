@@ -1,7 +1,6 @@
 'use strict';
 
-const fs = require('fs'),
-	getPosts = require('./modules/get-posts');
+const getPosts = require('./modules/get-posts');
 
 module.exports = function(response) {
 
@@ -10,13 +9,10 @@ module.exports = function(response) {
 		bodyClass: 'background'
 	};
 
-	getPosts().then(allPosts => {
+	getPosts().then(posts => {
 		
-		let posts = {},
-			ids = Object.keys(allPosts);
-
-		for (let i = 0; i < Math.max(5, ids.length); i++) {
-			posts[ids[i]] = allPosts[ids[i]];
+		if (posts.length > 5) {
+			posts = posts.splice(4, posts.length);
 		}
 
 		context.posts = posts;

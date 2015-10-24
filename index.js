@@ -5,6 +5,7 @@ var breadbox = require('breadbox');
 breadbox.init({
 	controllers: {
 		'/index': require('./controllers/index'),
+		'/blog': require('./controllers/blog'),
 		'/post/{{id}}': require('./controllers/post'),
 		'/breadbox/docs': function(request) { request.resolve(); },
 		'/breadbox': function(request) { request.resolve(); },

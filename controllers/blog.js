@@ -5,14 +5,11 @@ const getPosts = require('./modules/get-posts');
 module.exports = function(response) {
 
 	let context = {
-		bodyClass: 'write',
-		metaTitle: 'Write',
-		css: [
-			'/styles/write.css'
-		]
+		metaTitle: 'Blog | Mike Johnson, Javascript Developer',
+		bodyClass: 'background'
 	};
 
-	getPosts().then(posts => {
+	getPosts(true).then(posts => {
 		context.posts = posts;
 		response.resolve(context);
 	});

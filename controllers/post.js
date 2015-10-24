@@ -1,7 +1,6 @@
 'use strict';
 
-const fs = require('fs'),
-	bb = require('breadbox');
+const bb = require('breadbox');
 
 module.exports = function(response, request) {
 

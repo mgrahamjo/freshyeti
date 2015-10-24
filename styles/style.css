@@ -7,6 +7,10 @@ body {
     color: #737373;
 }
 
+::selection { 
+    background: rgba(0,0,0,.04);
+}
+
 .background {
     background-image: url('/images/bg.jpeg');
     background-size: 100%;
@@ -226,6 +230,11 @@ a:hover, input[type="submit"]:hover {
     padding: 10px 0;
     border-top: 1px solid #F3F3F3;
     border-bottom: 1px solid #F3F3F3;
+}
+
+.snippet {
+    height: 7em;
+    overflow: hidden;
 }
 
 .project-link {

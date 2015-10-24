@@ -1,0 +1,37 @@
+{{include partials/header}}
+
+{{include partials/menu}}
+
+<div class="wrapper">
+
+	<div class="hero">
+		<div class="logo">Blog</div>
+	</div>
+
+	<div class="content">
+
+		<div class="container clear">
+
+			{{for post in posts}}
+
+				{{for id.post in post}}
+
+					<h3><a href="/post/{{id}}">{{post.title}}</a></h3>
+
+					<p><em>{{post.date}}</em></p>
+
+					<div class="snippet">{{post.body|safe}}</div>
+
+					<p><a class="view-all" href="/post/{{id}}">more</a></p>
+
+				{{endfor}}
+
+			{{endfor}}
+
+		</div>
+
+	</div>
+
+</div>
+
+{{include partials/footer}}

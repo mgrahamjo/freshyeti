@@ -3,8 +3,10 @@
 <a class="right" href="/write/new-post">New Post</a>
 
 <ul class="wrapper">
-	{{for id.post in posts}}
+	{{for post in posts}}
+	{{for id.post in post}}
 		<li><a href="/write/{{id}}">{{post.title}}</a></li>
+	{{endfor}}
 	{{endfor}}
 </ul>
 
