@@ -16,13 +16,16 @@ module.exports = function(snip) {
 			
 			bb.db.get('posts/' + file).then(post => {
 
+				let id = Object.keys(post)[0];
+
 				if (snip) {
-					let id = Object.keys(post)[0],
-						snippet = post[id].body.substring(0, 400);
+					let snippet = post[id].body.substring(0, 400);
 					post[id].body = snippet.substring(0, snippet.lastIndexOf(' '));
 				}
 
-				posts.push(post);
+				post[id].id = id;
+
+				posts.push(post[id]);
 
 				if (files.indexOf(file) === files.length - 1) {
 

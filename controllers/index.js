@@ -5,8 +5,7 @@ const getPosts = require('./modules/get-posts');
 module.exports = function(response) {
 
 	let context = {
-		metaTitle: 'Mike Johnson, Javascript Developer',
-		bodyClass: 'background'
+		metaTitle: 'Mike Johnson, Javascript Developer'
 	};
 
 	getPosts().then(posts => {

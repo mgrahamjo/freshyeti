@@ -4,9 +4,7 @@
 
 <ul class="wrapper">
 	{{for post in posts}}
-	{{for id.post in post}}
-		<li><a href="/write/{{id}}">{{post.title}}</a></li>
-	{{endfor}}
+		<li><a href="/write/{{post.id}}">{{post.title}}</a></li>
 	{{endfor}}
 </ul>
 

@@ -29,9 +29,7 @@
 
 			<ul class="bloglist">
 			{{for post in posts}}
-			{{for id.post in post}}
-				<li><a href="/post/{{id}}">{{post.title}}</a></li>
-			{{endfor}}
+				<li><a href="/post/{{post.id}}">{{post.title}}</a></li>
 			{{endfor}}
 			</ul>
 
@@ -90,17 +88,25 @@
 </div>
 
 <script>
-if (window.pageYOffset) {
 
-	var el = document.getElementById('parallax');
+document.addEventListener('DOMContentLoaded', function() {
 
-	window.addEventListener('scroll', function() {
-		window.requestAnimationFrame(function() {
-			var offset = Math.floor(window.pageYOffset / 5);
-			el.setAttribute('style', 'transform:translate3d(0, -' + offset + 'px, 0);height:' + (document.body.clientHeight + offset) + 'px');
-		})
-	});
-}
+	if (window.pageYOffset !== undefined) {
+
+		var el = document.getElementById('parallax');
+
+		function parallax() {
+			window.requestAnimationFrame(function() {
+				var offset = Math.floor(window.pageYOffset / 5);
+				el.setAttribute('style', 'transform:translate3d(0, -' + offset + 'px, 0);height:' + (document.body.clientHeight + offset) + 'px');
+			});
+		}
+
+		window.addEventListener('scroll', parallax);
+
+		parallax();
+	}
+});
 </script>
 
 {{include partials/footer}}
