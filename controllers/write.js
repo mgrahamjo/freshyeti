@@ -2,7 +2,7 @@
 
 const getPosts = require('./modules/get-posts');
 
-module.exports = function(response) {
+module.exports = response => {
 
 	let context = {
 		bodyClass: 'write',

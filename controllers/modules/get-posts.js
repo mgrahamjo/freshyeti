@@ -3,7 +3,7 @@
 const fs = require('fs'),
 	bb = require('breadbox');
 
-module.exports = function(snip) {
+module.exports = snip => {
 
 	let posts = [],
 		oldest,

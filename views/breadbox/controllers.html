@@ -30,7 +30,7 @@ breadbox.init({
 
 	<p><strong>Authentication</strong></p>
 
-	<p>If a user must be logged in to see a particular route, append the route key with <code>'|authenticate'</code>. Unauthenticated requests to the page will then automatically redirect to <code>/login</code> (assuming you haven't overwritten <code>settings.loginPage</code>), where a successful login attempt will redirect back to the correct route.</p>
+	<p>If a user must be logged in to see a particular route, append the route key with <code>'|authenticate'</code>. Unauthenticated requests to the page will then automatically redirect to <code>/login</code> (or <code>settings.loginPage</code>), where a successful login attempt will redirect back to the correct route.</p>
 
 <code>const breadbox = require('breadbox');
 
@@ -45,7 +45,7 @@ breadbox.init({
 
 	<p><strong>Dynamic Routes</strong></p>
 
-	<p>Often, parts of a URL are required but dynamic. For example, a typical blog post URL might look like <code>'http://example.com/posts/this-is-a-post-id'</code>. In this case, we want to use the same controller no matter the post ID is, and we need to make the post ID available to the controller so that it can get the post from a data store. Breadbox's solution for this to use route parameters (not to be confused with query strings).</p>
+	<p>Often, parts of a URL are required but dynamic. For example, a typical blog post URL might look like <code>'http://example.com/posts/this-is-a-post-id'</code>. In this case, we want to use the same controller no matter what the post ID is, and we need to make the post ID available to the controller so that it can get the post from a data store. Breadbox's solution for this to use route parameters (not to be confused with query strings).</p>
 
 <code>const breadbox = require('breadbox');
 
