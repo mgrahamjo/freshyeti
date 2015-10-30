@@ -1,5 +1,5 @@
 body {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Exo 2', sans-serif;
     font-weight: 100;
 	margin: 0;
     font-size: 15px;
@@ -180,7 +180,7 @@ a:hover, input[type="submit"]:hover {
     float: left;
     font-size: 59pt;
     line-height: 59pt;
-    padding-right: 8px;
+    padding-right: 12px;
     padding-left: 3px;
     font-style: italic;
     font-family: Georgia, times, serif;
