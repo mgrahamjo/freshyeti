@@ -44,7 +44,17 @@ function checkScroll() {
 
 $(document).ready(function() {
 
-  $('#editor').val(toMarkdown($('#editor').val(), { gfm: true }));
+  $('#editor').val(toMarkdown($('#editor').val(), {
+    gfm: true,
+    converters: [{
+        filter: function(node) {
+            return node.tagName === 'PRE' && node.childNodes[0].tagName === 'CODE';
+        },
+        replacement: function(innerHtml, node) {
+            return '```\n' + innerHtml.replace(/<code>/, '').replace(/<\/code>/, '').replace(/`/g, '') + '\n```';
+        }
+    }]
+  }));
 
   editor = new SimpleMDE({
     element: document.getElementById('editor'),

@@ -7,7 +7,7 @@ breadbox.init({
 		'/index': require('./controllers/index'),
 		'/blog': require('./controllers/blog'),
 		'/post/{{id}}': require('./controllers/post'),
-		'/breadbox': function(request) { request.resolve(); },
+		'/breadbox': function(request) { request.resolve('breadbox/index.html'); },
 		'/write|authenticate': require('./controllers/write'),
 		'/write/{{id}}|authenticate': require('./controllers/edit'),
 	},
