@@ -46,14 +46,14 @@
 				<div class="desc">A Node MVC Framework</div>
 			</a>
 
-			<a href="/manila" class="project-link">
+			<a href="https://www.npmjs.com/package/manila" class="project-link">
 				Manila
-				<div class="desc">Declaritve DOM manipulation</div>
+				<div class="desc">Node Template Engine</div>
 			</a>
 
-			<a href="/barley" class="project-link">
-				Barley
-				<div class="desc">Node Template Engine</div>
+			<a href="https://www.npmjs.com/package/jdrop" class="project-link">
+				jdrop
+				<div class="desc">File-based data storage</div>
 			</a>
 
 			<a href="/crash" class="project-link">
@@ -61,22 +61,22 @@
 				<div class="desc">Error Handler for Node</div>
 			</a>
 
-			<a href="/premise" class="project-link">
-				Premise
-				<div class="desc">A New Promise</div>
+			<a href="https://www.npmjs.com/package/treaty" class="project-link">
+				Treaty
+				<div class="desc">More than a promise</div>
 			</a>
 
 			<a href="/post/persistent-in-memory-sessions" class="project-link">
-				MemSesh
+				Sessions
 				<div class="desc">Persistent In-memory Sessions</div>
 			</a>
 
-			<a href="/payload" class="project-link">
+			<a href="https://www.npmjs.com/package/payload" class="project-link">
 				Payload
 				<div class="desc">A Simpler Module Loader</div>
 			</a>
 
-			<a href="/knapsack" class="project-link">
+			<a href="https://github.com/mgrahamjo/knapsack" class="project-link">
 				Knapsack
 				<div class="desc">A Git Package Manager</div>
 			</a>

@@ -1,43 +1,42 @@
 'use strict';
 
-const fs = require('fs'),
-	bb = require('breadbox');
+const fs = require('fs');
 
 module.exports = snip => {
 
 	let posts = [],
 		oldest,
-		youngest,
-		result = bb.promise();
+		youngest;
 
-	fs.readdir('./././models/posts', (err, files) => {
+	return new Promise(resolve => {
 
-		files.forEach(file => {
-			
-			bb.db.get('posts/' + file).then(post => {
+		fs.readdir('./././models/posts', (err, files) => {
 
-				let id = Object.keys(post)[0];
+			files.forEach(file => {
+				
+				global.breadbox.db.get('posts/' + file).then(post => {
 
-				if (snip) {
-					let snippet = post[id].body.substring(0, 400);
-					post[id].body = snippet.substring(0, snippet.lastIndexOf(' '));
-				}
+					let id = Object.keys(post)[0];
 
-				post[id].id = id;
+					if (snip) {
+						let snippet = post[id].body.substring(0, 400);
+						post[id].body = snippet.substring(0, snippet.lastIndexOf(' '));
+					}
 
-				posts.push(post[id]);
+					post[id].id = id;
 
-				if (files.indexOf(file) === files.length - 1) {
+					posts.push(post[id]);
 
-					posts.sort((a, b) => {
-						return new Date(a.date) > new Date(b.date) ? -1 : 1;
-					});
+					if (files.indexOf(file) === files.length - 1) {
 
-					result.resolve(posts);
-				}
+						posts.sort((a, b) => {
+							return new Date(a.date) > new Date(b.date) ? -1 : 1;
+						});
+
+						resolve(posts);
+					}
+				});
 			});
 		});
 	});
-
-	return result;
 };
