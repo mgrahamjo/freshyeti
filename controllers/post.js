@@ -1,8 +1,8 @@
 'use strict';
 
-const bb = require('breadbox');
+module.exports = (resolve, request) => {
 
-module.exports = (response, request) => {
+	const bb = require('breadbox');
 
 	let context = {
 		bodyClass: 'background'
@@ -11,6 +11,6 @@ module.exports = (response, request) => {
 	bb.db.get('posts/' + request.params.id).then(post => {
 		context.post = post[request.params.id];
 		context.metaTitle = context.post.title + ' | Mike Johnson, Javascript Developer';
-		response.resolve(context, 'post.html');
+		resolve(context, 'post');
 	});
 };

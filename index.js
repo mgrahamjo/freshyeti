@@ -1,6 +1,6 @@
 'use strict';
 
-var breadbox = require('breadbox')({
+require('breadbox')({
 	controllers: {
 		'/index': require('./controllers/index'),
 		'/blog': require('./controllers/blog'),
@@ -12,5 +12,3 @@ var breadbox = require('breadbox')({
 	cacheHtml: false,
 	dataPath: 'models'
 });
-
-breadbox.init();

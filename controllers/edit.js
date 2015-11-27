@@ -1,8 +1,8 @@
 'use strict';
 
-const bb = require('breadbox');
+module.exports = (resolve, request) => {
 
-module.exports = (response, request) => {
+	const bb = require('breadbox');
 
 	let postFile = 'posts/' + request.params.id;
 
@@ -46,7 +46,7 @@ module.exports = (response, request) => {
 					date: request.body.date
 				};
 
-				bb.db.drop('posts/' + request.params.id).then(() => {
+				bb.db.del('posts/' + request.params.id).then(() => {
 					bb.db.put('posts/' + request.body.id, newPost).then(() => {
 						request.redirect('/write/' + request.body.id);
 					});
@@ -54,7 +54,7 @@ module.exports = (response, request) => {
 
 			} else {
 
-				response.resolve(context, 'edit.html', headers);
+				resolve(context, 'edit', headers);
 			}
 		});
 	});

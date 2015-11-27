@@ -56,8 +56,8 @@
 				<div class="desc">File-based data storage</div>
 			</a>
 
-			<a href="/crash" class="project-link">
-				Crash
+			<a href="https://www.npmjs.com/package/blooper" class="project-link">
+				Blooper
 				<div class="desc">Error Handler for Node</div>
 			</a>
 

@@ -1,20 +1,21 @@
 'use strict';
 
-const fs = require('fs');
-
 module.exports = snip => {
+
+	const fs = require('fs'),
+		bb = require('breadbox');
 
 	let posts = [],
 		oldest,
 		youngest;
 
-	return new Promise(resolve => {
+	return bb.promise(resolve => {
 
 		fs.readdir('./././models/posts', (err, files) => {
 
 			files.forEach(file => {
 				
-				global.breadbox.db.get('posts/' + file).then(post => {
+				bb.db.get('posts/' + file).then(post => {
 
 					let id = Object.keys(post)[0];
 

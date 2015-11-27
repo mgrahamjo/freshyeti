@@ -1,8 +1,8 @@
 'use strict';
 
-const getPosts = require('./modules/get-posts');
+module.exports = resolve => {
 
-module.exports = response => {
+	const getPosts = require('./modules/get-posts');
 
 	let context = {
 		bodyClass: 'write',
@@ -14,6 +14,6 @@ module.exports = response => {
 
 	getPosts().then(posts => {
 		context.posts = posts;
-		response.resolve(context);
+		resolve(context);
 	});
 };

@@ -1,8 +1,8 @@
 'use strict';
 
-const getPosts = require('./modules/get-posts');
+module.exports = resolve => {
 
-module.exports = response => {
+	const getPosts = require('./modules/get-posts');
 
 	let context = {
 		metaTitle: 'Mike Johnson, Javascript Developer'
@@ -15,6 +15,6 @@ module.exports = response => {
 		}
 
 		context.posts = posts;
-		response.resolve(context);
+		resolve(context);
 	});
 };
