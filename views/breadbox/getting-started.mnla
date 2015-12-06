@@ -10,22 +10,15 @@
 cd my-project
 </code>
 
-	<p>Install Breadbox. Until v1.0 is released, the project will not be registered on npm or Bower.</p>
+	<p>Install Breadbox.</p>
 
-	<ul>
-		<li>Using <a href="http://jspm.io/" target="_blank">JSPM</a>:</li>
-		<code>jspm install github:mgrahamjo/breadbox</code>
-		<li>Using <a href="https://github.com/mgrahamjo/knapsack" target="_blank">Knapsack</a>:</li>
-		<code>knapsack https://github.com/mgrahamjo/breadbox</code>
-		<li>Using your mouse: <a href="https://github.com/mgrahamjo/breadbox/archive/master.zip">download the ZIP</a> and extract it into the node_modules directory (or equivalent) of your project.</li>
-		<li><strong>Note</strong>: Make sure the breadbox folder is two levels beneath the root of your project. For example: <code>/my-project/node_modules/breadbox/</code>.</li>
-	</ul>
+<code>npm install breadbox --save</code>
 
 	<p>In your project directory, create a file for your app. We'll use <code>index.js</code>.</p>
 
 <code><i>// my-project/index.js</i>
-require('breadbox').init();</code>
+require('breadbox')();</code>
 
-	<p>From your terminal, in your project's root directory, run <code>node index</code>, where <code>index</code> is the name of the file you created. You should now be able to see Breadbox's default index page at <code>http://localhost:1337</code>.</p>
+	<p>From your terminal, in your project's root directory, run <code>node index</code>, where <code>index</code> is the name of the file you created. You should now be able to see Breadbox's default index page at <code>http://localhost:1337</code>. Here you can create an admin user, which allows you to use a built-in interface for CRUD (create, read, update, delete) operations on models and users.</p>
 	
 </div>

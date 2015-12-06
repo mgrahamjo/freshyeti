@@ -11,7 +11,7 @@ module.exports = snip => {
 
 	return bb.promise(resolve => {
 
-		fs.readdir('./././models/posts', (err, files) => {
+		fs.readdir('./././data/posts', (err, files) => {
 
 			files.forEach(file => {
 				
@@ -30,8 +30,10 @@ module.exports = snip => {
 
 					if (files.indexOf(file) === files.length - 1) {
 
-						posts.sort((a, b) => {
+						posts = posts.sort((a, b) => {
 							return new Date(a.date) > new Date(b.date) ? -1 : 1;
+						}).filter(post => {
+							return post.live;
 						});
 
 						resolve(posts);

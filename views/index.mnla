@@ -86,23 +86,17 @@
 </div>
 
 <script>
-
 document.addEventListener('DOMContentLoaded', function() {
-
 	if (window.pageYOffset !== undefined) {
-
-		var el = document.getElementById('parallax');
-
-		function parallax() {
+		var e = document.getElementById('parallax');
+		function p() {
 			window.requestAnimationFrame(function() {
-				var offset = Math.floor(window.pageYOffset / 5);
-				el.setAttribute('style', 'transform:translate3d(0, -' + offset + 'px, 0);height:' + (document.body.clientHeight + offset) + 'px');
+				var o = Math.floor(window.pageYOffset / 5);
+				e.setAttribute('style', 'transform:translate3d(0, -' + o + 'px, 0);height:' + (document.body.clientHeight + o) + 'px');
 			});
 		}
-
-		window.addEventListener('scroll', parallax);
-
-		parallax();
+		window.addEventListener('scroll', p);
+		p();
 	}
 });
 </script>

@@ -27,7 +27,7 @@
 			<li><a href="#controllers">Controllers</a></li>
 				<ul>
 					<li><a href="#routes">Routes</a></li>
-					<li><a href="#response">The response object</a></li>
+					<li><a href="#resolve">The resolve function</a></li>
 					<li><a href="#request">The request object</a></li>
 						<ul>
 							<li><a href="#data">request.data</a></li>

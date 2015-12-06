@@ -23,6 +23,9 @@
     <a class="editorMark"></a>
 	<textarea name="body" id="editor">{{post.body|safe}}</textarea>
 
+    <label>Live</label>
+    <input type="checkbox" name="live" {{if post.live}}checked="checked"{{endif}}>
+
 	<input type="submit" value="save">
 
 </form>

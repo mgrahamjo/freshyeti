@@ -4,13 +4,13 @@
 
 	<h1>Controllers</h1>
 
-	<p>The purpose of a controller is to get the data necessary to render a template. It does this by creating a <code>context</code> object and passing it to <code>response.resolve()</code>. When creating a <code>context</code> object, a controller has access to stored data as well as a number of data sources on the request, such as the session, query string, POST data, and the URL itself.</p>
+	<p>The purpose of a controller is to get the data necessary to render a template. It does this by creating a <code>context</code> object and passing it to a <code>resolve()</code> function. When creating a <code>context</code> object, a controller has access to stored data as well as a number of data sources on the request, such as the session, query string, POST data, and the URL itself.</p>
 
-	<p>Controllers are passed to the configuration object on <code>breadbox.init</code>. For readability, you'll want to use <code>require</code> or <code>import</code> to store them as modules in their own files:</p>
+	<p>Controllers are passed to the <code>breadbox</code> configuration object. For readability, you'll want to use <code>require</code> or <code>import</code> to store them as modules in their own files:</p>
 
 <code>const breadbox = require('breadbox');
 
-breadbox.init({
+breadbox({
 	controllers: {
 		'/index': require('./controllers/index'),
 		'/docs': require('./controllers/docs')
@@ -26,7 +26,7 @@ breadbox.init({
 
 	<h3>Routes</h3>
 
-	<p>The keys on the <code>controllers</code> object are used to match a requested URL to a particular controller function. Because all controllers match HTML views, <code>'.html'</code> extensions are ignored. For example, <code>'http://example.com/page.html'</code> and <code>'http://example.com/page'</code> would both match a controller with the key <code>'/page'</code>. In either case, by default breadbox would look for the corresponding view at <code>/views/page.html</code>. The url <code>'/'</code> is normalized to match the controller key <code>'/index'</code>, and correspondes to the view at <code>/views/index.html</code>.</p>
+	<p>The keys on the <code>controllers</code> object are used to match a requested URL to a particular controller function. Because all controllers are associated with views, <code>'.html'</code> extensions are ignored. For example, <code>'http://example.com/page.html'</code> and <code>'http://example.com/page'</code> would both match a controller with the key <code>'/page'</code>. In either case, by default breadbox would look for the corresponding view at <code>/views/page.mnla</code>. The url <code>'/'</code> is normalized to match the controller key <code>'/index'</code>, and correspondes to the view at <code>/views/index.mnla</code>.</p>
 
 	<p><strong>Authentication</strong></p>
 
@@ -34,7 +34,7 @@ breadbox.init({
 
 <code>const breadbox = require('breadbox');
 
-breadbox.init({
+breadbox({
 	controllers: {
 		'/change-password|authenticate': require('./controllers/change-password')
 	}
@@ -49,7 +49,7 @@ breadbox.init({
 
 <code>const breadbox = require('breadbox');
 
-breadbox.init({
+breadbox({
 	controllers: {
 		'/posts/{{id|skip}}': require('./controllers/post')
 	}
@@ -62,11 +62,11 @@ breadbox.init({
 
 <div class="section">
 
-	<a name="response"></a>
+	<a name="resolve"></a>
 
-	<h3>Response</h3>
+	<h3>Resolve</h3>
 
-	<p>The value of each property in the <code>controllers</code> object is a function. The first argument passed to this function is a <code>response</code> object. This object is a <a href="#promise">promise</a> that can be resolved with three values:</p>
+	<p>The value of each property in the <code>controllers</code> object is a function. The first argument passed to this function is a <code>resolve</code> function. To send a response, this function can be passed up to three values:</p>
 
 	<ul>
 		<li><code>context</code> (object): Keys on this object will be available as variables in the view.</li>
@@ -74,12 +74,12 @@ breadbox.init({
 		<li><code>headers</code> (object): Any headers you want to send with the response. Sending a <code>headers</code> object does not overwrite the default headers object - any headers you send will be merged with <a href="#headers">default headers</a>.</li>
 	</ul>
 
-<code>var breadbox = require('breadbox');
+<code>const breadbox = require('breadbox');
 
-breadbox.init({
+breadbox({
 	controllers: {
-		'/index': function(response) {
-		    response.resolve( { context: "Foo" }, 'home.html', { 'Set-Cookie': 'bar=baz' } );
+		'/index': resolve => {
+		    resolve( { context: "Foo" }, 'home.html', { 'Set-Cookie': 'bar=baz' } );
 		}
 	}
 });
@@ -99,7 +99,7 @@ breadbox.init({
 		<li><a name="data"></a><code>request.data</code> (object): the raw request data from the browser.</li>
 		<li><a name="body"></a><code>request.body</code> (object): POST or PUT data. </li>
 		<li><a name="files"></a><code>request.files</code> (object): Any PUT or POSTed files. </li>
-		<li><a name="params"></a><code>request.params</code> (object): Any dynamic portions of the requested URL. For example, if the controller key was <code>'/posts/{{id|skip}}'</code>, the current post ID can be found on <code>request.params.id</code>.</li>
+		<li><a name="params"></a><code>request.params</code> (object): Any dynamic portions of the requested URL. For example, if the controller key was <code>'/posts/{{id|skip}}'</code>, the current post ID can be found in <code>request.params.id</code>.</li>
 		<li><a name="cookies"></a><code>request.cookies</code> (object): Any cookies your app has set in the requesting browser.</li>
 		<li><a name="redirect"></a><code>request.redirect( [string] location, ([number] status), ([object] headers) )</code> (function): A function that can be used to send a redirect rather than resolving the response. Accepts three arguments:
 			<ul>
@@ -108,7 +108,7 @@ breadbox.init({
 				<li><code>headers</code> (object): Headers. Defaults to the <a href="#headers">default headers</a> plus <code>Location</code>.</li>
 			</ul>
 		</li>
-		<li><a name="settings"></a><code>request.settings</code> (object): The configuration object you passed to <code>breadbox.init</code>.</li>
+		<li><a name="settings"></a><code>request.settings</code> (object): The breadbox configuration object.</li>
 		<li><a name="session"></a><code>request.session</code> (object): An object that has methods for session management. Breadbox ships with an in-memory session store, which makes it very fast, but less scalable than a database session solution. Unlike most in-memory session managers, Breadbox is able to persist sessions through a server restart or crash by dumping them to a JSON file before exiting. </li>
 			<ul>
 				<li><code>session.save( [string] id, [any] data, ([string] key) )</code> (function): If <code>key</code> is provided, sets a <code>key</code> property with the value <code>data</code> on the session identified by <code>id</code>. If <code>key</code> is not provided, replaces the whole session object with <code>data</code>.</li>

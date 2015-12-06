@@ -2,8 +2,8 @@
 <div class="nav">
 	<a href="/">Home</a>
 	<a href="/blog">Blog</a>
-	<a href="/projects">Projects</a>
-	<a href="https://github.com/mgrahamjo">Github</a>
+	<a href="https://github.com/mgrahamjo" target="_blank">Github</a>
+	<a href="https://www.npmjs.com/~mgrahamjo" target="_blank">NPM</a>
 </div>
 <div class="menu">
 	<div class="bar"></div>

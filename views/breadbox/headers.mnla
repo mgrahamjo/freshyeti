@@ -9,6 +9,8 @@
 <code>'Content-Type: [based on filetype]'
 'Cache-Control: max-age=2419200' <i>// 1 month cache</i>
 'Keep-Alive: timeout=15, max=100'
+'X-XSS-Protection: 1'
+'X-Content-Type-Options: nosniff'
 </code>
 
 	<p>When you supply headers with a response, they are merged with the default headers. </p>

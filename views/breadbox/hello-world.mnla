@@ -6,18 +6,18 @@
 
 	<p>In your project's root directory, make file called <code>index.js</code>:</p>
 
-<code>var breadbox = require('breadbox');
+<code>const breadbox = require('breadbox');
 
-breadbox.init({
+breadbox({
 	controllers: {
-		'/index': function(response) {
-		    response.resolve({ person: "World" });
+		'/index': resolve => {
+		    resolve({ person: "World" });
 		}
 	}
 });
 </code>
 
-	<p>In your project's root directory, create <code>views/index.html</code>:</p>
+	<p>In your project's root directory, create <code>views/index.mnla</code>:</p>
 
 	<code>Hello, {{person|skip}}!</code>
 

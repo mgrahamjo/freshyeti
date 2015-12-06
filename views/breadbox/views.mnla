@@ -4,7 +4,7 @@
 
 	<h1>Views</h1>
 
-	<p>The Breadbox template engine is designed to be fast, simple, and secure. The entire engine is 3kb minified and has no dependencies other than Node, but you may be suprised at the flexibility it affords.</p>
+	<p>The Breadbox template engine (published as <a href="https://www.npmjs.com/package/manila" target="_blank">manila</a>) is fast, simple, and secure. </p>
 
 </div>
 
@@ -39,7 +39,7 @@
 
 	<h3>Includes</h3>
 
-	<p><code>&lcub;&lcub; include &lt;path/to/file&gt; &rcub;&rcub;</code>: Includes the content of the named file as part of the current template. <code>&lt;path/to/file&gt;</code> is relative to <code>views/</code>. Leave out the file extension - <code>.html</code> is assumed.</p>
+	<p><code>&lcub;&lcub; include &lt;path/to/file&gt; &rcub;&rcub;</code>: Includes the content of the named file as part of the current template. <code>&lt;path/to/file&gt;</code> is relative to <code>views/</code>. Leave out the file extension - <code>.mnla</code> is assumed.</p>
 
 </div>
 

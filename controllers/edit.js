@@ -43,7 +43,8 @@ module.exports = (resolve, request) => {
 				newPost[request.body.id] = {
 					title: request.body.title,
 					body: request.body.body,
-					date: request.body.date
+					date: request.body.date,
+					live: request.body.live
 				};
 
 				bb.db.del('posts/' + request.params.id).then(() => {

@@ -4,20 +4,18 @@
 
 	<h1>Intro</h1>
 
-	<p>Breadbox is an MVC framework for Node.js. It is currently in development and should not be used without expectation of breaking changes.</p>
+	<p>Breadbox is an MVC framework for Node.js. It is currently in beta and should not be used without expectation of breaking changes.</p>
 
-	<p>Generally, Node development is highly modular. Frameworks provide little functionality out of the box, relying instead on middleware. Breadbox, however, strives to provide a feature set broad enough to meet the needs of a standard web application, with an emphasis on avoiding bloat while maintaining security. Out of the box, it includes:</p>
+	<p>Most Node frameworks provide little functionality out of the box. This allows for immense flexibility, but requires that you find and implement middleware to do almost anything. Breadbox strikes a different balance, providing more functionality out of the box at the expense of flexibility. It strives to provide a feature set broad enough to meet the needs of a standard web application, with an emphasis on avoiding bloat while maintaining security. Out of the box, it includes:</p>
 
 	<ul>
 		<li>A template engine</li>
 		<li>A file-based data store</li>
 		<li>Error interceptors to relieve error handling annoyances</li>
-		<li>Security features like automatic HTML escaping and CSRF protection</li>
+		<li>Security features like automatic HTML escaping, CSRF protection, and security headers</li>
 		<li>Authentication and session mangement</li>
-		<li>A promise object implementation</li>
+		<li>An enhanced promise object implementation</li>
 		<li>POST data parsing including file uploads</li>
 	</ul>
-
-	<p>Some examples in this document use ECMAScript 2015. While Breadbox uses ES6 internally, there is no requirement that you use it in your app.</p>
 	
 </div>
