@@ -87,7 +87,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-	if (window.pageYOffset !== undefined) {
+	var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	if (w > 400 && window.pageYOffset !== undefined) {
 		var e = document.getElementById('parallax');
 		function p() {
 			window.requestAnimationFrame(function() {

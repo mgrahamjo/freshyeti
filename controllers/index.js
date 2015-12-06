@@ -5,7 +5,8 @@ module.exports = resolve => {
 	const getPosts = require('./modules/get-posts');
 
 	let context = {
-		metaTitle: 'Mike Johnson, Javascript Developer'
+		metaTitle: 'Mike Johnson, Javascript Developer',
+		bodyClass: 'black'
 	};
 
 	getPosts().then(posts => {
