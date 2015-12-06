@@ -39,8 +39,6 @@
 
 			<h3>Projects</h3>
 
-			<a class="view-all" href="/projects">view all</a>
-
 			<a href="/breadbox" class="project-link">
 				Breadbox
 				<div class="desc">A Node MVC Framework</div>
