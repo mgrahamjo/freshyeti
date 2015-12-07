@@ -320,6 +320,7 @@ ul {
 
 .sidebar ul {
     list-style: none;
+    padding: 0;
 }
 
 .sidebar h3 {
@@ -379,5 +380,11 @@ p code, li code {
     }
     .background {
         background-size: auto 324px;
+    }
+    .sidebar {
+        display: none;
+    }
+    .main {
+        margin-left: 0;
     }
 }
