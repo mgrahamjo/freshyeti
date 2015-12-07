@@ -340,7 +340,7 @@ ul {
 
 code {
     background-color: #FBFBFB;
-    padding: 10px 8%;
+    padding: 10px 15px;
     display: block;
     color: #926666;
     margin: 5px 0;
@@ -386,5 +386,8 @@ p code, li code {
     }
     .main {
         margin-left: 0;
+    }
+    code {
+        padding: 10px 8%;
     }
 }
