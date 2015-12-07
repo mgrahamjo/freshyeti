@@ -30,7 +30,7 @@ body {
     width: 100%;
     height: 100%;
     background-image: url('/images/header.jpeg');
-    background-size: 100% 304px;
+    background-size: 100% 324px;
     background-repeat: no-repeat;
 }
 
@@ -378,6 +378,6 @@ p code, li code {
         -webkit-box-shadow: none;
     }
     .background {
-        background-size: auto 304px;
+        background-size: auto 324px;
     }
 }
