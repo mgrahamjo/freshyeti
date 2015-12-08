@@ -372,11 +372,14 @@ p code, li code {
 
 @media (max-width: 700px) {
     .container {
-        margin: 1px 0;
+        margin: 0;
         box-shadow: none;
         -o-box-shadow: none;
         -moz-box-shadow: none;
         -webkit-box-shadow: none;
+    }
+    .container:nth-child(2n) {
+        background-color: #FDFDFD;
     }
     .background {
         background-size: auto 324px;
