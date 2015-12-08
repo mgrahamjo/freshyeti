@@ -54,7 +54,7 @@ $(document).ready(function() {
             return node.tagName === 'PRE' && node.childNodes[0].tagName === 'CODE';
         },
         replacement: function(innerHtml, node) {
-            return '```\n' + innerHtml.replace(/<code>/, '').replace(/<\/code>/, '').replace(/`/g, '') + '\n```';
+            return '```\n' + node.innerHTML.replace(/<code>/, '').replace(/<\/code>/, '').replace(/`/g, '') + '\n```';
         }
     },{
         filter: function(node) {
