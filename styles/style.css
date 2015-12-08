@@ -318,6 +318,7 @@ ul {
 
 .sidebar ul {
     list-style: none;
+    padding: 0;
 }
 
 .sidebar h3 {
@@ -337,7 +338,7 @@ ul {
 
 code {
     background-color: #FBFBFB;
-    padding: 10px 8%;
+    padding: 10px 15px;
     display: block;
     color: #926666;
     margin: 5px 0;
@@ -369,13 +370,25 @@ p code, li code {
 
 @media (max-width: 700px) {
     .container {
-        margin: 1px 0;
+        margin: 0;
         box-shadow: none;
         -o-box-shadow: none;
         -moz-box-shadow: none;
         -webkit-box-shadow: none;
     }
+    .container:nth-child(2n) {
+        background-color: #FDFDFD;
+    }
     .background {
         background-size: auto 324px;
+    }
+    .sidebar {
+        display: none;
+    }
+    .main {
+        margin-left: 0;
+    }
+    code {
+        padding: 10px 8%;
     }
 }
