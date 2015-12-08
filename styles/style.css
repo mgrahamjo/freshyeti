@@ -103,8 +103,6 @@ a:hover, input[type="submit"]:hover {
     padding: 20px 54px 6px 20px;
     z-index: 2;
     pointer-events: none;
-    background-color: transparent;
-    transition: background-color 0.3s;
 }
 
 .menu .bar {

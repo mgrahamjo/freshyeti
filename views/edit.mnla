@@ -56,6 +56,13 @@ $(document).ready(function() {
         replacement: function(innerHtml, node) {
             return '```\n' + innerHtml.replace(/<code>/, '').replace(/<\/code>/, '').replace(/`/g, '') + '\n```';
         }
+    },{
+        filter: function(node) {
+            return node.matches('code *');
+        },
+        replacement: function(innerHtml, node) {
+            return node.outerHTML;
+        }
     }]
   }));
 
