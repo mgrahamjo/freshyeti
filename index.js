@@ -8,5 +8,6 @@ require('breadbox')({
 		'/breadbox': resolve => { resolve({}, 'breadbox/index.mnla'); },
 		'/write|authenticate': require('./controllers/write'),
 		'/write/{{id}}|authenticate': require('./controllers/edit'),
+		'/preview/{{folder}}/{{image}}': require('./controllers/preview')
 	}
 });
