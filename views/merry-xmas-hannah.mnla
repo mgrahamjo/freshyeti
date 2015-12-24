@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+    <title>Do you belieb?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+</head>
+<body>
+
+	<img src="/images/stubhub.png" style="
+	width: 500px;
+    float: left;
+    margin: 50px;">
+
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/0HHdMxPcHsg?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1" frameborder="0" allowfullscreen style="margin-top: 50px;"></iframe>
+</body>
+</html>
