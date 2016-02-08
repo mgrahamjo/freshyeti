@@ -1,4 +1,4 @@
-{{include partials/header}}
+<<include partials/header>>
 
 	<div class="sidebar">
 
@@ -61,21 +61,21 @@
 
 	<div class="main">
 
-		{{include breadbox/intro}}
+		<<include breadbox/intro>>
 
-		{{include breadbox/getting-started}}
+		<<include breadbox/getting-started>>
 
-		{{include breadbox/hello-world}}
+		<<include breadbox/hello-world>>
 
-		{{include breadbox/breadbox}}
+		<<include breadbox/breadbox>>
 
-		{{include breadbox/controllers}}
+		<<include breadbox/controllers>>
 
-		{{include breadbox/views}}
+		<<include breadbox/views>>
 
-		{{include breadbox/headers}}
+		<<include breadbox/headers>>
 
-		{{include breadbox/security}}
+		<<include breadbox/security>>
 
 	</div>
 	

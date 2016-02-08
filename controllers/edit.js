@@ -20,8 +20,7 @@ module.exports = (resolve, request) => {
 					}
 				},
 				css: [
-					'/styles/write.css',
-					'/styles/markdown.min.css'
+					'/styles/write.css'
 				],
 				token: token
 			};

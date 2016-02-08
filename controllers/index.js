@@ -10,9 +10,9 @@ module.exports = resolve => {
 	};
 
 	getPosts().then(posts => {
-		
+
 		if (posts.length > 5) {
-			posts = posts.splice(4, posts.length);
+			posts.splice(5, posts.length);
 		}
 
 		context.posts = posts;

@@ -1,3 +1,3 @@
 # MikeJ.codes
 
-Personal site of Mike Johnson, JS dev. Under construction.
+Personal site of Mike Johnson, JS dev.

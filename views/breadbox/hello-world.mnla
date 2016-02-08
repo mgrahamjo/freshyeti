@@ -19,7 +19,7 @@ breadbox({
 
 	<p>In your project's root directory, create <code>views/index.mnla</code>:</p>
 
-	<code>Hello, {{person|skip}}!</code>
+	<code>Hello, &lt;&lt;person&gt;&gt;!</code>
 
 	<p>In your terminal, enter the root directory of your project and start the server:</p>
 

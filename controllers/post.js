@@ -5,7 +5,10 @@ module.exports = (resolve, request) => {
 	const bb = require('breadbox');
 
 	let context = {
-		bodyClass: 'background'
+		bodyClass: 'background',
+		css: [
+			'/styles/prism.css'
+		]
 	};
 
 	bb.db.get('posts/' + request.params.id).then(post => {

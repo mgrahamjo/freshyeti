@@ -1,6 +1,6 @@
-{{include partials/header}}
+<<include partials/header>>
 
-{{include partials/menu}}
+<<include partials/menu>>
 
 <div class="wrapper">
 
@@ -12,17 +12,17 @@
 
 		<div class="container clear">
 
-			{{for post in posts}}
+			<<posts.forEach(post => {>>
 
-				<h3><a href="/post/{{post.id}}">{{post.title}}</a></h3>
+				<h3><a href="/post/<<post.id>>"><<post.title>></a></h3>
 
-				<p><em>{{post.date}}</em></p>
+				<p><em><<post.date>></em></p>
 
-				<div class="snippet">{{post.body|safe}}</div>
+				<div class="snippet"><<<post.body>>></div>
 
-				<p><a class="view-all" href="/post/{{post.id}}">more</a></p>
+				<p><a class="view-all" href="/post/<<post.id>>">more</a></p>
 
-			{{endfor}}
+			<<})>>
 
 		</div>
 
@@ -30,4 +30,4 @@
 
 </div>
 
-{{include partials/footer}}
+<<include partials/footer>>

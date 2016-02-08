@@ -35,7 +35,7 @@ module.exports = snip => {
 						}).filter(post => {
 							return post.live;
 						});
-
+						
 						resolve(posts);
 					}
 				});

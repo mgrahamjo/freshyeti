@@ -1,38 +1,36 @@
-{{include partials/header}}
+<<include partials/header>>
 
 <a class="right" href="/write">Back</a>
 
-<form action="/write/{{id}}" method="post" class="wrapper">
+<form action="/write/<<id>>" method="post" class="wrapper">
 
 	<div class="saved">Saved!</div>
 
-	<input type="hidden" name="token" value="{{token}}">
+	<input type="hidden" name="token" value="<<token>>">
 
-	<input type="hidden" name="oldId" value="{{id}}">
+	<input type="hidden" name="oldId" value="<<id>>">
 
 	<label>Title</label>
-	<input type="text" name="title" value="{{post.title}}">
+	<input type="text" name="title" value="<<post.title>>">
 
 	<label>ID</label>
-	<input type="text" name="id" value="{{id}}">
+	<input type="text" name="id" value="<<id>>">
 
     <label>Date</label>
-    <input type="text" name="date" value="{{post.date}}">
+    <input type="text" name="date" value="<<post.date>>">
 
 	<label>Body</label>
-    <a class="editorMark"></a>
-	<textarea name="body" id="editor">{{post.body|safe}}</textarea>
+  <a class="editorMark"></a>
+	<textarea name="body" id="editor"><<<post.body>>></textarea>
 
     <label>Live</label>
-    <input type="checkbox" name="live" {{if post.live}}checked="checked"{{endif}}>
+    <input type="checkbox" name="live" <<if (post.live) {>>checked="checked"<<}>>>
 
 	<input type="submit" value="save">
 
 </form>
 
 <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="/js/markdown.min.js"></script>
-<script src="/js/toMarkdown.js"></script>
 <script>
 
 var editor;
@@ -46,30 +44,6 @@ function checkScroll() {
 }
 
 $(document).ready(function() {
-
-  $('#editor').val(toMarkdown($('#editor').val(), {
-    gfm: true,
-    converters: [{
-        filter: function(node) {
-            return node.tagName === 'PRE' && node.childNodes[0].tagName === 'CODE';
-        },
-        replacement: function(innerHtml, node) {
-            return '```\n' + node.innerHTML.replace(/<code>/, '').replace(/<\/code>/, '').replace(/`/g, '') + '\n```';
-        }
-    },{
-        filter: function(node) {
-            return node.matches('code *');
-        },
-        replacement: function(innerHtml, node) {
-            return node.outerHTML;
-        }
-    }]
-  }));
-
-  editor = new SimpleMDE({
-    element: document.getElementById('editor'),
-    spellChecker: false
-  });
 
   $('[name="id"]').on('blur', function() {
     $.mj.save(true);
@@ -85,11 +59,17 @@ $(document).ready(function() {
   $.mj.setTimer();
 
   setInterval(function() {
-    $('#editor').val(editor.markdown(editor.value()));
     $.mj.checkContent($('#editor').val());
   }, 30000);
 
   $(window).on('scroll', checkScroll);
+
+  $('#editor')
+    .height($('#editor')[0].scrollHeight)
+    .on('input change', function() {
+      $('#editor')[0].style.height = 0 + 'px';
+      $('#editor')[0].style.height = $('#editor')[0].scrollHeight + 'px';
+    });
 
 });
 
@@ -128,9 +108,8 @@ $(document).ready(function() {
     }
 
     function save(newPostID) {
-        $('#editor').val(editor.markdown(editor.value()));
         if (validate()) {
-            $.post('/write/{{id}}', $('form').serialize())
+            $.post('/write/<<id>>', $('form').serialize())
                 .done(function() {
                     if (newPostID) {
                         window.location = '/write/' + $('[name="id"]').val();

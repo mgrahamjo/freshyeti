@@ -178,6 +178,11 @@ a:hover, input[type="submit"]:hover {
     margin-top: 30px;
 }
 
+.bloglist li {
+    border-bottom: 1px solid #EFEFEF;
+    padding: 7px 0;
+}
+
 .post {
     text-align: left;
 }
@@ -337,14 +342,7 @@ ul {
 }
 
 code {
-    background-color: #FBFBFB;
-    padding: 10px 15px;
-    display: block;
-    color: #926666;
-    margin: 5px 0;
-    white-space: pre-wrap;
     font-size: 12px;
-    box-shadow: 2px 2px #F1F1F1;
 }
 
 code i {

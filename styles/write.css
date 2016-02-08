@@ -59,31 +59,18 @@
     pointer-events: none;
 }
 
-div.editor-toolbar {
-    position: relative;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    padding: 0 10px;
-    border-radius: 0;
-    border: 1px solid gainsboro;
-    z-index: 2;
-    top: 0;
-    opacity: 1;
-    background: white;
-    box-sizing: border-box;
-    box-shadow: 0 2px 0px rgba(0,0,0,.05);
+#editor {
+    min-height: 200px;
+    background-color: #505050;
+    color: #F3F3F3;
+    box-shadow: inset 2px 2px 5px #353535;
+    overflow: hidden;
 }
 
-.editor-toolbar.fixed {
-    position: fixed;
-    width: 50%;
+#editor:focus {
+    outline: none;
 }
 
-.editor-toolbar:hover,
-.editor-toolbar input.title:focus,
-.editor-toolbar input.title:hover {
-    opacity: 1
+#editor::selection {
+    background-color: white;
 }
