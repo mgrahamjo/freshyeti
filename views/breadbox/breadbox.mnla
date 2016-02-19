@@ -8,7 +8,7 @@
 
 	<h3>Initialization</h3>
 
-	<p><code>require('breadbox')( [Object] config );</code></p>
+	<pre class="language-javascript"><code>require('breadbox')( [Object] config );</code></pre>
 
 	<p>When called as a function, the breadbox module accepts a config object and runs your app. The config object may have the following properties:</p>
 
@@ -56,7 +56,7 @@
 
 	<p>All <code>breadbox.db</code> methods return promise objects which resolve when the operation succeeds.</p>
 
-<code>const db = require('breadbox').db;
+<pre class="language-javascript"><code>const db = require('breadbox').db;
 
 <i>// Get a blog post</i>
 db.get('posts').then(posts => {
@@ -65,7 +65,7 @@ db.get('posts').then(posts => {
 		body: posts[0].content
 	};
 });
-</code>
+</code></pre>
 
 </div>
 
@@ -93,7 +93,7 @@ db.get('posts').then(posts => {
 
 	<p>For example:</p>
 
-<code>const breadbox = require('breadbox');
+<pre class="language-javascript"><code>const breadbox = require('breadbox');
 
 function getData() {
 
@@ -115,7 +115,7 @@ getData().then((data, message) => {
 }).catch(error => {
 	console.trace(error.stack);
 });
-</code>
+</code></pre>
 
 </div>
 
@@ -146,7 +146,7 @@ getData().then((data, message) => {
 
 	<p>A typical use case:</p>
 
-<code>const fs = require('fs'),
+<pre class="language-javascript"><code>const fs = require('fs'),
 handle = require('breadbox').handle;
 
 fs.readFile('/path/to/file.json', { encoding: 'utf8' }, (err, data) => {
@@ -157,7 +157,7 @@ fs.readFile('/path/to/file.json', { encoding: 'utf8' }, (err, data) => {
 	});
 
 });
-</code>
+</code></pre>
 
 </div>
 
@@ -171,7 +171,7 @@ fs.readFile('/path/to/file.json', { encoding: 'utf8' }, (err, data) => {
 
 	<p>Additionally, <code>breadbox.attempt</code> returns a promise which will be resolved with the result of a successful call to <code>try</code>.</p>
 
-<code>const attempt = require('breadbox').attempt;
+<pre class="language-javascript"><code>const attempt = require('breadbox').attempt;
 
 attempt(() => {
 
@@ -185,6 +185,6 @@ attempt(() => {
 	
 	console.log('global.possiblyDefined.data is ' + data);
 });
-</code>
+</code></pre>
 
 </div>

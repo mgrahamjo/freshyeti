@@ -6,7 +6,7 @@
 
 	<p>In your project's root directory, make file called <code>index.js</code>:</p>
 
-<code>const breadbox = require('breadbox');
+<pre class="language-javascript"><code>const breadbox = require('breadbox');
 
 breadbox({
 	controllers: {
@@ -15,15 +15,15 @@ breadbox({
 		}
 	}
 });
-</code>
+</code></pre>
 
 	<p>In your project's root directory, create <code>views/index.mnla</code>:</p>
 
-	<code>Hello, &lt;&lt;person&gt;&gt;!</code>
+	<pre class="language-html"><code>Hello, &lt;&lt;person&gt;&gt;!</code></pre>
 
 	<p>In your terminal, enter the root directory of your project and start the server:</p>
 
-<code>node index</code>
+<pre class="language-javascript"><code>node index</code></pre>
 
 	<p>In your browser, navigate to <code>http://localhost:1337</code> and you should see the following:</p>
 

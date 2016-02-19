@@ -1,5 +1,7 @@
 <<include partials/header>>
 
+	<link href="/styles/prism.css" rel="stylesheet">
+
 	<div class="sidebar">
 
 		<h3>Breadbox</h3>
@@ -45,9 +47,8 @@
 			<li><a href="#views">Views</a></li>
 				<ul>
 					<li><a href="#variables">Variables</a></li>
-					<li><a href="#filters">Filters</a></li>
 					<li><a href="#includes">Includes</a></li>
-					<li><a href="#if-blocks">Conditional blocks</a></li>
+					<li><a href="#conditionals">Conditionals</a></li>
 					<li><a href="#loops">Loops</a></li>
 				</ul>
 			<li><a href="#headers">Headers</a>
@@ -78,6 +79,8 @@
 		<<include breadbox/security>>
 
 	</div>
+
+	<script src="/js/prism.js"></script>
 	
 </body>
 </html>

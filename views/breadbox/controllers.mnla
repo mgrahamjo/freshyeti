@@ -8,7 +8,7 @@
 
 	<p>Controllers are passed to the <code>breadbox</code> configuration object. For readability, you'll want to use <code>require</code> or <code>import</code> to store them as modules in their own files:</p>
 
-<code>const breadbox = require('breadbox');
+<pre class="language-javascript"><code>const breadbox = require('breadbox');
 
 breadbox({
 	controllers: {
@@ -16,7 +16,7 @@ breadbox({
 		'/docs': require('./controllers/docs')
 	}
 });
-</code>
+</code></pre>
 
 </div>
 
@@ -32,14 +32,14 @@ breadbox({
 
 	<p>If a user must be logged in to see a particular route, append the route key with <code>'|authenticate'</code>. Unauthenticated requests to the page will then automatically redirect to <code>/login</code> (or <code>settings.loginPage</code>), where a successful login attempt will redirect back to the correct route.</p>
 
-<code>const breadbox = require('breadbox');
+<pre class="language-javascript"><code>const breadbox = require('breadbox');
 
 breadbox({
 	controllers: {
 		'/change-password|authenticate': require('./controllers/change-password')
 	}
 });
-</code>
+</code></pre>
 
 	<p>After authentication, user data can be found in <code><a href="#request">request.sess</a></code>.</p>
 
@@ -47,14 +47,14 @@ breadbox({
 
 	<p>Often, parts of a URL are required but dynamic. For example, a typical blog post URL might look like <code>'http://example.com/posts/this-is-a-post-id'</code>. In this case, we want to use the same controller no matter what the post ID is, and we need to make the post ID available to the controller so that it can get the post from a data store. Breadbox's solution for this to use route parameters (not to be confused with query strings).</p>
 
-<code>const breadbox = require('breadbox');
+<pre class="language-javascript"><code>const breadbox = require('breadbox');
 
 breadbox({
 	controllers: {
 		'/posts/&lt;&lt;id&gt;&gt;': require('./controllers/post')
 	}
 });
-</code>
+</code></pre>
 
 	<p>Now, the post ID will be made available to the controller as <code>request.params.id</code>.</p>
 
@@ -74,7 +74,7 @@ breadbox({
 		<li><code>headers</code> (object): Any headers you want to send with the response. Sending a <code>headers</code> object does not overwrite the default headers object - any headers you send will be merged with <a href="#headers">default headers</a>.</li>
 	</ul>
 
-<code>const breadbox = require('breadbox');
+<pre class="language-javascript"><code>const breadbox = require('breadbox');
 
 breadbox({
 	controllers: {
@@ -83,7 +83,7 @@ breadbox({
 		}
 	}
 });
-</code>
+</code></pre>
 
 </div>
 

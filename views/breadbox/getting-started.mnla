@@ -6,18 +6,18 @@
 
 	<p>First install <a href="https://nodejs.org/" target="_blank">Node</a> if you haven't, and make a directory for your project. </p>
 
-<code>mkdir my-project
+<pre class="language-bash"><code>mkdir my-project
 cd my-project
-</code>
+</code></pre>
 
 	<p>Install Breadbox.</p>
 
-<code>npm install breadbox --save</code>
+<pre class="language-bash"><code>npm install breadbox --save</code></pre>
 
 	<p>In your project directory, create a file for your app. We'll use <code>index.js</code>.</p>
 
-<code><i>// my-project/index.js</i>
-require('breadbox')();</code>
+<pre class="language-javascript"><code><i>// my-project/index.js</i>
+require('breadbox')();</code></pre>
 
 	<p>From your terminal, in your project's root directory, run <code>node index</code>, where <code>index</code> is the name of the file you created. You should now be able to see Breadbox's default index page at <code>http://localhost:1337</code>. Here you can create an admin user, which allows you to use a built-in interface for CRUD (create, read, update, delete) operations on models and users.</p>
 	

@@ -23,7 +23,7 @@
 		<li><code>token</code> (string): the csrf token that must be included as a hidden form field for a POST to be valid.</li>
 	</ul>
 
-<code><i>// A controller function:</i>
+<pre class="language-javascript"><code><i>// A controller function:</i>
 const csrf = require('breadbox').csrf;
 
 module.exports = (response, request) => {
@@ -35,14 +35,14 @@ module.exports = (response, request) => {
 		response.resolve(context, undefined, headers);
 	});
 }
-</code>
+</code></pre>
 
-<code><i>&lt;!-- form.html: --></i>
+<pre class="language-html"><code><i>&lt;!-- form.html: --></i>
 &lt;form action="/" method="post">
 	&lt;input type="hidden" name="token" value="&lt;&lt;token&gt;&gt;">
 	&lt;input type="text" name="data">
 	&lt;input type="submit">
 &lt;/form>
-</code>
+</code></pre>
 
 </div>
