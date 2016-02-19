@@ -198,6 +198,10 @@ a:hover, input[type="submit"]:hover {
     color: #8C8C8C;
 }
 
+.post pre, .post pre[class*="language-"] {
+    margin: 30px 8%;
+}
+
 .footer {
     background-color: #F3F3F3;
     text-align: center;
