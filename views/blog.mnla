@@ -18,9 +18,14 @@
 
 				<p><em><<post.date>></em></p>
 
-				<div class="snippet"><<<post.body>>></div>
+				<div class="snippet">
+					<div class="gradient"></div>
+					<<<post.body>>>
+				</div>
 
 				<p><a class="view-all" href="/post/<<post.id>>">more</a></p>
+
+				<div class="separator"></div>
 
 			<<})>>
 
