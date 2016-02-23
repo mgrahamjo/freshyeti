@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = snip => {
+module.exports = (snip, all) => {
 
 	const fs = require('fs'),
 		bb = require('breadbox');
@@ -32,9 +32,13 @@ module.exports = snip => {
 
 						posts = posts.sort((a, b) => {
 							return new Date(a.date) > new Date(b.date) ? -1 : 1;
-						}).filter(post => {
-							return post.live;
 						});
+
+						if (!all) {
+							posts = posts.filter(post => {
+								return post.live;
+							});
+						}
 						
 						resolve(posts);
 					}

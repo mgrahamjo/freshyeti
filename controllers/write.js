@@ -12,7 +12,7 @@ module.exports = resolve => {
 		]
 	};
 
-	getPosts().then(posts => {
+	getPosts(false, true).then(posts => {
 		context.posts = posts;
 		resolve(context);
 	});
