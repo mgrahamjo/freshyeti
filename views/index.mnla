@@ -1,6 +1,6 @@
-<<include partials/header>>
+<:include partials/header:>
 
-<<include partials/menu>>
+<:include partials/menu:>
 
 <div id="parallax"></div>
 
@@ -28,9 +28,9 @@
 			<a class="view-all" href="/blog">view all</a>
 
 			<ul class="bloglist">
-			<<posts.forEach(post => {>>
-				<li><a href="/post/<<post.id>>"><<post.title>></a></li>
-			<<})>>
+			<:posts.forEach(post => {:>
+				<li><a href="/post/<:post.id:>"><:post.title:></a></li>
+			<:}):>
 			</ul>
 
 		</div>
@@ -102,4 +102,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<<include partials/footer>>
+<:include partials/footer:>

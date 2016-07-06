@@ -1,11 +1,11 @@
-<<include partials/header>>
+<:include partials/header:>
 
 <a class="right" href="/write/new-post">New Post</a>
 
 <ul class="wrapper">
-	<<posts.forEach(post => {>>
-		<li><a href="/write/<<post.id>>"><<post.title>></a></li>
-	<<})>>
+	<:posts.forEach(post => {:>
+		<li><a href="/write/<:post.id:>"><:post.title:></a></li>
+	<:}):>
 </ul>
 
 </body>

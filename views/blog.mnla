@@ -1,6 +1,6 @@
-<<include partials/header>>
+<:include partials/header:>
 
-<<include partials/menu>>
+<:include partials/menu:>
 
 <div class="wrapper">
 
@@ -12,22 +12,22 @@
 
 		<div class="container clear">
 
-			<<posts.forEach(post => {>>
+			<:posts.forEach(post => {:>
 
-				<h3><a href="/post/<<post.id>>"><<post.title>></a></h3>
+				<h3><a href="/post/<:post.id:>"><:post.title:></a></h3>
 
-				<p><em><<post.date>></em></p>
+				<p><em><:post.date:></em></p>
 
 				<div class="snippet">
 					<div class="gradient"></div>
-					<<<post.body>>>
+					<::post.body::>
 				</div>
 
-				<p><a class="view-all" href="/post/<<post.id>>">more</a></p>
+				<p><a class="view-all" href="/post/<:post.id:>">more</a></p>
 
 				<div class="separator"></div>
 
-			<<})>>
+			<:}):>
 
 		</div>
 
@@ -35,4 +35,4 @@
 
 </div>
 
-<<include partials/footer>>
+<:include partials/footer:>

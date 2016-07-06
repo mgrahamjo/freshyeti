@@ -39,7 +39,7 @@ module.exports = (response, request) => {
 
 <pre class="language-html"><code><i>&lt;!-- form.html: --></i>
 &lt;form action="/" method="post">
-	&lt;input type="hidden" name="token" value="&lt;&lt;token&gt;&gt;">
+	&lt;input type="hidden" name="token" value="&lt;:token:&gt;">
 	&lt;input type="text" name="data">
 	&lt;input type="submit">
 &lt;/form>

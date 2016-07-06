@@ -1,21 +1,21 @@
-<<include partials/header>>
+<:include partials/header:>
 
 <script src="/js/prism.js"></script>
 
-<<include partials/menu>>
+<:include partials/menu:>
 
 <div class="wrapper">
 
 	<div class="hero">
-		<div class="logo"><<post.title>></div>
-		<div class="logo-script"><<post.date>></div>
+		<div class="logo"><:post.title:></div>
+		<div class="logo-script"><:post.date:></div>
 	</div>
 
 	<div class="content">
 
 		<div class="container clear">
 
-			<div class="post"><<<post.body>>></div>
+			<div class="post"><::post.body::></div>
 
 		</div>
 
@@ -23,4 +23,4 @@
 
 </div>
 
-<<include partials/footer>>
+<:include partials/footer:>

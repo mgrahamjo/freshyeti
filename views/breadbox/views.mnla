@@ -14,9 +14,9 @@
 
 	<h3>Variables</h3>
 
-	<p><code>&lt;&lt; expression >></code>: This tag will be replaced with the HTML-escaped result of evaluating the expression or variable with the current context.</p> 
+	<p><code>&lt;: expression :></code>: This tag will be replaced with the HTML-escaped result of evaluating the expression or variable with the current context.</p> 
 
-	<p><code>&lt;&lt;&lt; expression >>></code>: Use three carets instead of two to prevent HTML-escaping of the expression.</p> 
+	<p><code>&lt;:: expression ::></code>: Use three carets instead of two to prevent HTML-escaping of the expression.</p> 
 
 <pre class="language-javascript"><code>// Controller
 ...
@@ -27,9 +27,9 @@ let context = {
 resolve(context);
 </code></pre>
 <pre class="language-html"><code>&lt;!-- views/index.mnla -->
-My name is &lt;&lt; name >>.
-&lt;&lt; html >>
-&lt;&lt;&lt; html >>>
+My name is &lt;: name :>.
+&lt;: html :>
+&lt;:: html ::>
 
 &lt;!-- output: -->
 My name is Mike.
@@ -44,7 +44,7 @@ My name is Mike.
 
 	<h3>Includes</h3>
 
-	<p><code>&lt;&lt; include path/to/file >></code>: Includes the content of the named template as part of the current template. <code>path/to/file</code> is relative to <code>views/</code> unless overwritten during configuration.</p> 
+	<p><code>&lt;: include path/to/file :></code>: Includes the content of the named template as part of the current template. <code>path/to/file</code> is relative to <code>views/</code> unless overwritten during configuration.</p> 
 
 </div>
 
@@ -62,11 +62,11 @@ My name is Mike.
 
 	<h3>Conditionals</h3>
 
-<pre class="language-html"><code>&lt;&lt; if (expression) { >>
+<pre class="language-html"><code>&lt;: if (expression) { :>
 	&lt;p>This markup renders if expression is truthy.&lt;/p>
-&lt;&lt; } else { >>
+&lt;: } else { :>
 	&lt;p>This markup renders if expression is falsy&lt;/p>
-&lt;&lt; } >>
+&lt;: } :>
 </code></pre>
 
 </div>
@@ -77,9 +77,9 @@ My name is Mike.
 
 	<h3>Array Loops</h3>
 
-<pre class="language-html"><code>&lt;&lt; list.forEach(item => { >>
-	&lt;li>&lt;&lt;item>>&lt;/li>
-&lt;&lt; }) >>
+<pre class="language-html"><code>&lt;: list.forEach(item => { :>
+	&lt;li>&lt;:item:>&lt;/li>
+&lt;: }) :>
 </code></pre>
 
 </div>
@@ -88,17 +88,9 @@ My name is Mike.
 
 	<h3>Object Loops</h3>
 
-<pre class="language-html"><code>&lt;&lt; for (key in obj) { >>
-	&lt;li>&lt;&lt;key>> is &lt;&lt;obj[key]>>&lt;/li>
-&lt;&lt; } >>
+<pre class="language-html"><code>&lt;: for (key in obj) { :>
+	&lt;li>&lt;:key:> is &lt;:obj[key]:>&lt;/li>
+&lt;: } :>
 </code></pre>
-
-</div>
-
-<div class="section">
-
-	<h3>Syntax Highlighting</h3>
-
-	<p>If your text editor thinks your mnla file is an html file, it might indicate that &lt;&lt; manila >> tags are errors. To prevent this, change your syntax setting for the .mnla filetype to XML. In Sublime: View > Syntax > Open all with current extension as > XML.</p>
 
 </div>

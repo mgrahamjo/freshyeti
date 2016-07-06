@@ -1,13 +1,13 @@
 <!doctype html>
 <html>
 <head>
-    <title><<metaTitle>></title>
+    <title><:metaTitle:></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="/images/favicon.ico">
     <link href='https://fonts.googleapis.com/css?family=Exo+2:200,700,200italic' rel='stylesheet' type='text/css'>
     <link href="/styles/style.css" rel="stylesheet">
-    << if (typeof css !== 'undefined') { css.forEach(style => { >>
-    	<link href="<<style>>" rel="stylesheet">
-    << })} >>
+    <: if (typeof css !== 'undefined') { css.forEach(style => { :>
+    	<link href="<:style:>" rel="stylesheet">
+    <: })} :>
 </head>
-<body class="<<bodyClass>>">
+<body class="<:bodyClass:>">

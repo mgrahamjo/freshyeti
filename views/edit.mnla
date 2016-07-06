@@ -1,30 +1,30 @@
-<<include partials/header>>
+<:include partials/header:>
 
 <a class="right" href="/write">Back</a>
 
-<form action="/write/<<id>>" method="post" class="wrapper">
+<form action="/write/<:id:>" method="post" class="wrapper">
 
 	<div class="saved">Saved!</div>
 
-	<input type="hidden" name="token" value="<<token>>">
+	<input type="hidden" name="token" value="<:token:>">
 
-	<input type="hidden" name="oldId" value="<<id>>">
+	<input type="hidden" name="oldId" value="<:id:>">
 
 	<label>Title</label>
-	<input type="text" name="title" value="<<post.title>>">
+	<input type="text" name="title" value="<:post.title:>">
 
 	<label>ID</label>
-	<input type="text" name="id" value="<<id>>">
+	<input type="text" name="id" value="<:id:>">
 
     <label>Date</label>
-    <input type="text" name="date" value="<<post.date>>">
+    <input type="text" name="date" value="<:post.date:>">
 
 	<label>Body</label>
   <a class="editorMark"></a>
-	<textarea name="body" id="editor"><<<post.body>>></textarea>
+	<textarea name="body" id="editor"><::post.body::></textarea>
 
     <label>Live</label>
-    <input type="checkbox" name="live" <<if (post.live) {>>checked="checked"<<}>>>
+    <input type="checkbox" name="live" <:if (post.live) {:>checked="checked"<:}:>>
 
 	<input type="submit" value="save">
 
@@ -109,7 +109,7 @@ $(document).ready(function() {
 
     function save(newPostID) {
         if (validate()) {
-            $.post('/write/<<id>>', $('form').serialize())
+            $.post('/write/<:id:>', $('form').serialize())
                 .done(function() {
                     if (newPostID) {
                         window.location = '/write/' + $('[name="id"]').val();

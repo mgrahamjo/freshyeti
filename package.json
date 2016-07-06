@@ -4,7 +4,7 @@
   "description": "Personal website",
   "main": "index.js",
   "dependencies": {
-    "breadbox": "0.0.7"
+    "breadbox": "0.1.0"
   },
   "devDependencies": {},
   "scripts": {
