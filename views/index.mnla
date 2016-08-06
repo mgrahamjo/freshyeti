@@ -49,6 +49,16 @@
 				<div class="desc">Node Template Engine</div>
 			</a>
 
+			<a href="https://www.npmjs.com/package/cyanide" class="project-link">
+				CyanIDE
+				<div class="desc">A web-based IDE</div>
+			</a>
+
+			<a href="https://www.npmjs.com/package/yodel" class="project-link">
+				Yodel
+				<div class="desc">AJAX model validation</div>
+			</a>
+
 			<a href="https://www.npmjs.com/package/jdrop" class="project-link">
 				jdrop
 				<div class="desc">File-based data storage</div>
@@ -64,19 +74,9 @@
 				<div class="desc">More than a promise</div>
 			</a>
 
-			<a href="/post/persistent-in-memory-sessions" class="project-link">
-				Sessions
-				<div class="desc">Persistent In-memory Sessions</div>
-			</a>
-
 			<a href="https://www.npmjs.com/package/payload" class="project-link">
 				Payload
 				<div class="desc">A Simpler Module Loader</div>
-			</a>
-
-			<a href="https://github.com/mgrahamjo/knapsack" class="project-link">
-				Knapsack
-				<div class="desc">A Git Package Manager</div>
 			</a>
 
 		</div>

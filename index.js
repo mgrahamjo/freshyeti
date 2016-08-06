@@ -1,5 +1,3 @@
-'use strict';
-
 require('breadbox')({
 	controllers: {
 		'/index': require('./controllers/index'),

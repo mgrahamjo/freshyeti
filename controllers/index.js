@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = resolve => {
 
 	const getPosts = require('./modules/get-posts');

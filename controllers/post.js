@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = (resolve, request) => {
 
 	const bb = require('breadbox');

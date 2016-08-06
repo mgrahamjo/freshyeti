@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = (snip, all) => {
 
 	const fs = require('fs'),
