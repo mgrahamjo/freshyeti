@@ -51,7 +51,7 @@ breadbox({
 
 breadbox({
 	controllers: {
-		'/posts/&lt;&lt;id&gt;&gt;': require('./controllers/post')
+		'/posts/&lt;:id:&gt;': require('./controllers/post')
 	}
 });
 </code></pre>
@@ -99,7 +99,7 @@ breadbox({
 		<li><a name="data"></a><code>request.data</code> (object): the raw request data from the browser.</li>
 		<li><a name="body"></a><code>request.body</code> (object): POST or PUT data. </li>
 		<li><a name="files"></a><code>request.files</code> (object): Any PUT or POSTed files. </li>
-		<li><a name="params"></a><code>request.params</code> (object): Any dynamic portions of the requested URL. For example, if the controller key was <code>'/posts/&lt;&lt;id&gt;&gt;'</code>, the current post ID can be found in <code>request.params.id</code>.</li>
+		<li><a name="params"></a><code>request.params</code> (object): Any dynamic portions of the requested URL. For example, if the controller key was <code>'/posts/&lt;:id:&gt;'</code>, the current post ID can be found in <code>request.params.id</code>.</li>
 		<li><a name="cookies"></a><code>request.cookies</code> (object): Any cookies your app has set in the requesting browser.</li>
 		<li><a name="redirect"></a><code>request.redirect( [string] location, ([number] status), ([object] headers) )</code> (function): A function that can be used to send a redirect rather than resolving the response. Accepts three arguments:
 			<ul>
