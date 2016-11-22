@@ -123,7 +123,7 @@ a:hover, input[type="submit"]:hover {
     background-color: rgba(0,0,0,.6);
     position: fixed;
     top: 0;
-    left: 0;
+    left: -15%;
     padding-top: 50px;
     height: 100%;
     z-index: 2;
@@ -154,6 +154,7 @@ a:hover, input[type="submit"]:hover {
 .menu-toggle:checked + .nav {
 	visibility: visible;
     opacity: 1;
+    left: 0;
 }
 
 .hero {
