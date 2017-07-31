@@ -214,6 +214,14 @@ a:hover, input[type="submit"]:hover {
     margin: 30px 8%;
 }
 
+.post img {
+    max-width: 100%;
+}
+
+.caption {
+    font-size: 13px;
+}
+
 .footer {
     background-color: #F3F3F3;
     text-align: center;
